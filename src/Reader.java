@@ -23,7 +23,7 @@ public class FileCounter {
         }
 
         System.out.println("Archivo: " + file.getName());
-        System.out.println("Líneas físicas: " + physicalLines);
-        System.out.println("Líneas lógicas: " + logicalLines);
+        System.out.println("Lineas fisicas: " + physicalLines);
+        System.out.println("Lineas logicas: " + logicalLines);
     }
 }

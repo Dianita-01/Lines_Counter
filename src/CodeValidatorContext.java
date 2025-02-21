@@ -1,4 +1,3 @@
-
 public class CodeValidatorContext {
     private SpecificRules validator;
 
