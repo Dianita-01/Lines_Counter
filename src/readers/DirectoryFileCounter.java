@@ -17,7 +17,7 @@ public class DirectoryFileCounter {
         }
 
         for (File file : files) {
-            if (file.isFile()) {
+            if (file.isFile() && file.getName().endsWith(".java")) {
                 FileCounter fileCounter = new FileCounter();
                 fileCounter.countLinesInFile(file);
             }
