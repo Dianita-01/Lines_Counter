@@ -1,4 +1,7 @@
+package readers;
 import java.io.File;
+
+import files.FileCounter;
 
 public class DirectoryFileCounter {
     public void countLinesInDirectory(File directory) {

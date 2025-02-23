@@ -1,5 +1,8 @@
+package readers;
 import java.io.File;
 import java.util.Scanner;
+
+import files.FileCounter;
 
 public class HandleInput {
     public void processInput(String[] args) {
