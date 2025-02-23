@@ -24,8 +24,8 @@ public class HandleInput {
             DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter();
             directoryFileCounter.countLinesInDirectory(file);
         } else if (file.isFile()) {
-            FileCounter fileCounter = new FileCounter();
-            fileCounter.countLinesInFile(file);
+            FileCounter fileCounter = new FileCounter(file);
+            fileCounter.countLinesInFile();
         } else {
             System.out.println("La ruta proporcionada no es valida.");
         }
