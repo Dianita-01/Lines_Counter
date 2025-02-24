@@ -56,7 +56,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasClassDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\w+(\\s+\\w+)*\\s+class\\s+\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?";
+        String structureKeywords = "\\w+(\\s+\\w+)*\\s+class\\s+\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     } 
 
