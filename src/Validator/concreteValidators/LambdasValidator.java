@@ -1,10 +1,10 @@
-package validator.concreteValidators;
+package Validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import validator.ValidatorContext.CodeValidationContext;
-import validator.ValidatorContext.StandardValidator;
+import Validator.ValidatorContext.CodeValidationContext;
+import Validator.ValidatorContext.StandardValidator;
 
 /**
  * La clase "LambdasValidator" proporciona los métodos para validar una formato de lambdas para poder hacer la suma de lineas lógicas y físicas solo

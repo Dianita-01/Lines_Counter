@@ -1,10 +1,10 @@
-package validator.concreteValidators;
+package Validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import validator.ValidatorContext.CodeValidationContext;
-import validator.ValidatorContext.StandardValidator;
+import Validator.ValidatorContext.CodeValidationContext;
+import Validator.ValidatorContext.StandardValidator;
 /**
  * La clase "PhysicalFormatValidator" proporciona los métodos para validar una formato de líneas físicas para poder hacer la suma de físicas solo
  * en caso de ser una línea física que necesite validarse

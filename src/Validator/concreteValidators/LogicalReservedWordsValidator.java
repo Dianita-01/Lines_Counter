@@ -1,10 +1,10 @@
-package validator.concreteValidators;
+package Validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import validator.ValidatorContext.CodeValidationContext;
-import validator.ValidatorContext.StandardValidator;
+import Validator.ValidatorContext.CodeValidationContext;
+import Validator.ValidatorContext.StandardValidator;
 
 /**
  * La clase "LogicalReservedWordsValidator" proporciona los métodos para validar a la línea le pertecene palabras reservadas para poder hacer 

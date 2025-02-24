@@ -1,11 +1,11 @@
-package validator.validatorControlers;
+package Validator.validatorControlers;
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import validator.ValidatorContext.CodeValidationContext;
-import validator.ValidatorContext.StandardValidator;
-import validator.concreteValidators.OrganizationalStructureValidator;
-import validator.concreteValidators.StructureDefinitionValidator;
+import Validator.ValidatorContext.CodeValidationContext;
+import Validator.ValidatorContext.StandardValidator;
+import Validator.concreteValidators.OrganizationalStructureValidator;
+import Validator.concreteValidators.StructureDefinitionValidator;
 
 /**
  * La clase "FileStructureValidator" proporciona los métodos para validar un archivo cuente con la estrucura de un archivo como lo descrito en el formato para después validar su contenido

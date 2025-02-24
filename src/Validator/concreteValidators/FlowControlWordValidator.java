@@ -1,10 +1,10 @@
-package validator.concreteValidators;
+package Validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import validator.ValidatorContext.CodeValidationContext;
-import validator.ValidatorContext.StandardValidator;
+import Validator.ValidatorContext.CodeValidationContext;
+import Validator.ValidatorContext.StandardValidator;
 
 /**
  * La clase "FlowControlWordValidator" proporciona los métodos para validar el formato de los flujos de control de las estructuras de control lógicas

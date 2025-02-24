@@ -5,8 +5,8 @@ import java.util.List;
 import model.CodeSegment;
 import readers.ReaderFile;
 
-import validator.ValidatorContext.CodeValidationContext;
-import validator.validatorControlers.FileStructureValidator;
+import Validator.ValidatorContext.CodeValidationContext;
+import Validator.validatorControlers.FileStructureValidator;
 
 /**
  * La clase "FileCounter" proporciona los métodos que se necesitan para empezar el conteo de lineas y validación de un archivo
