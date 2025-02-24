@@ -84,7 +84,9 @@ public class PhysicalFormatValidator extends StandardValidator{
     private boolean validateMiddleOfFlowControl(String line) throws CodeStandarException{
         if (!line.trim().equals("}")) {
             String structure = "^\\s*\\}\\s*(else|finally)\\s*\\{\\s*(//.*)?$";
+            String endLine ="^}\\s*(//.*)?$";
             if (matchesPattern(line, structure)) return true;
+            if (matchesPattern(line, endLine)) return true;
             throw new CodeStandarException("No se cumple el formato de codigo");
         }
         return true;
