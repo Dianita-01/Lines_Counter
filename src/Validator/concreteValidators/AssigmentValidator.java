@@ -47,7 +47,7 @@ public class AssigmentValidator extends StandardValidator{
      */
 
     public boolean isAssigment(String line) {
-        String structure ="^.+\\s*=\\s*.+;";
+        String structure ="^.+\\s*=\\s*.+;\\s*(//.*)?";
         return matchesPattern(line.trim(), structure);
     }
 
@@ -77,8 +77,9 @@ public class AssigmentValidator extends StandardValidator{
 
     public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
         if(lines.size()>0) lines.remove(0);
+        String structure ="^.*?;\\s*(//.*)?$";
         while (lines.size()>0) {
-            if (lines.get(0).trim().endsWith(";")) {
+            if (matchesPattern(lines.get(0).trim(), structure)) {
                 if (lines.get(0).trim().startsWith(";")) throw new CodeStandarException("No se cumple el formato de codigo");
                 this.codeValidationContext.addPhysicalLine();
                 return true;
@@ -86,7 +87,7 @@ public class AssigmentValidator extends StandardValidator{
             this.codeValidationContext.addPhysicalLine();
             if(lines.size()>0) lines.remove(0);
         }
-        if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo");
+        if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo de asignación");
         return false;
         
     }

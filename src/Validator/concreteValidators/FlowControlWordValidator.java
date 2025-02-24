@@ -1,10 +1,10 @@
-package Validator.concreteValidators;
+package validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import Validator.ValidatorContext.CodeValidationContext;
-import Validator.ValidatorContext.StandardValidator;
+import validator.validatorContext.CodeValidationContext;
+import validator.validatorContext.StandardValidator;
 
 /**
  * La clase "FlowControlWordValidator" proporciona los métodos para validar el formato de los flujos de control de las estructuras de control lógicas
@@ -46,15 +46,8 @@ public class FlowControlWordValidator extends StandardValidator{
      */
 
     public boolean hasLogicalFlowControlWords(String line) throws CodeStandarException{
-        String structure ="^\\}[\\s]*(else if|catch)[\\s]*\\(.*\\)\\s*\\{?"; 
-        if (matchesPattern(line.trim(), structure)){
-            if (line.trim().endsWith("{")) {
-                return true;
-            }
-            throw new CodeStandarException("Las estructuras de control no cumplen el formato de codigo");
-        } else {
-           return false;
-        }
+        String structure ="^\\}[\\s]*(else if|catch)[\\s]*\\(.*\\)\\s*\\{?\\s*(//.*)?"; 
+        return matchesPattern(line.trim(), structure);
     }
 
          /*
@@ -84,15 +77,13 @@ public class FlowControlWordValidator extends StandardValidator{
         
     public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
         lines.remove(0);
-        String structure = ".*\\)\\s*\\{?";
+        String structure ="^.*?\\{\\s*(//.*)?$";
         while (lines.size()>0) {
             if (matchesPattern(lines.get(0).trim(), structure)) {
                     if (lines.get(0).trim().endsWith("{")) {
                         if (lines.get(0).trim().startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
                         this.codeValidationContext.addPhysicalLine();
                         return true;
-                    } else {
-                        throw new CodeStandarException("Estructura de control invalida");
                     }
             }
                 if(lines.size()>0) lines.remove(0);

@@ -45,7 +45,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasInterfaceOrEnumDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "^\\b(?:\\w+\\s)+\\s*(?:interface|enum)\\s\\w+(\\s+\\w+)*\\s*\\{?$";
+        String structureKeywords = "^\\b(?:\\w+\\s)+\\s*(?:interface|enum)\\s\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     }
 
@@ -56,7 +56,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasClassDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\w+(\\s+\\w+)*\\s+class\\s+\\w+(\\s+\\w+)*\\s*\\{?";
+        String structureKeywords = "\\w+(\\s+\\w+)*\\s+class\\s+\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     } 
 
@@ -67,7 +67,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasRecordDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\b\\w+(?:\\s+\\w+)*\\s+record\\s*\\([^)]*\\)(?:\\s+\\w+(?:\\s+\\w+)*)?(?:\\s+[^{]+)?\\s*\\{?";
+        String structureKeywords = "\\b\\w+(?:\\s+\\w+)*\\s+record\\s*\\([^)]*\\)(?:\\s+\\w+(?:\\s+\\w+)*)?(?:\\s+[^{]+)?\\s*\\{?\\s*(//.*)?";
         return hasCorrestStructure(lines, structureKeywords);
     }
 
@@ -92,8 +92,9 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @throws CodeStandarException si es una estrucura de definición y no está en el formato
      */
     public boolean hasCorrestStructure(List<String> lines, String pattern) throws CodeStandarException {
-        if (matchesPattern(lines.get(0), pattern)){
-            if (!lines.get(0).trim().endsWith("{")){
+        String structure ="^.*?\\{\\s*(//.*)?$";
+        if (matchesPattern(lines.get(0).trim(), pattern)){
+            if (!matchesPattern(lines.get(0).trim(), structure)){
                 return findEndOfLine(lines);
             }
             return true;
@@ -111,8 +112,9 @@ public class StructureDefinitionValidator extends StandardValidator{
      */
     public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
         lines.remove(0);
+        String structure ="^.*?\\{\\s*(//.*)?$";
         while (lines.size()>0) {
-            if (lines.get(0).trim().endsWith("{")) {
+            if (matchesPattern(lines.get(0).trim(), structure)) {
                 if (lines.get(0).trim().startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
                 this.codeValidationContext.addPhysicalLine();
                 return true;

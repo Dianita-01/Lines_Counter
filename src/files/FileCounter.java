@@ -22,6 +22,7 @@ public class FileCounter {
 
     public FileCounter(File file) {
        this.file = file;
+       this.codeSegment = new CodeSegment();
     }
 
     /*
@@ -36,11 +37,13 @@ public class FileCounter {
             codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
             codeValidationContext.validate(lines);
             this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
+            showResults(); 
             
         } catch (Exception e) {
+            System.out.println(this.file.getName());
             System.err.println(e.getMessage());
         }
-        showResults(); 
+        
     }
 
     public void showResults(){

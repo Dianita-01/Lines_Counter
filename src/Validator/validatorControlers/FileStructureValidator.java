@@ -66,7 +66,7 @@ public class FileStructureValidator extends StandardValidator{
             this.codeValidationContext.setStandardValidator(new StructureCountValidator(this.codeValidationContext));
             return this.codeValidationContext.validate(lines);
         }else{
-            throw new CodeStandarException("El archivo no cumple con una estructura válida.");
+            throw new CodeStandarException("El archivo no cumple con una estructura válida de definición.");
         }
     }
     

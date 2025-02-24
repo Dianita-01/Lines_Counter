@@ -63,12 +63,13 @@ public class PhysicalFormatValidator extends StandardValidator{
      */
 
     private boolean isCorrectFormat(String line) throws CodeStandarException{
-        String multipleStatements = "\\b[a-zA-Z_]\\w*\\s+[a-zA-Z_]\\w*\\s*(?:,\\s*[a-zA-Z_]\\w*\\s*)+;?";
+        String multipleStatements = "\\b[a-zA-Z_]\\w*\\s+[a-zA-Z_]\\w*\\s*(?:,\\s*[a-zA-Z_]\\w*\\s*)+;\\s*(//.*)?";
         if (line.startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
         if (line.startsWith("do")) throw new CodeStandarException("No se cumple el formato de codigo");
         if(matchesPattern(line.trim(), multipleStatements)) throw new CodeStandarException("No se cumple el formato de codigo");
         if(line.trim().startsWith("else") || line.trim().startsWith("finally")) throw new CodeStandarException("No se cumple el formato de codigo");
         if(line.trim().startsWith("}")) return validateMiddleOfFlowControl(line);
+        if(line.trim().startsWith(";")) return validateMiddleOfFlowControl(line);
         return true;
     }
 
@@ -82,7 +83,7 @@ public class PhysicalFormatValidator extends StandardValidator{
 
     private boolean validateMiddleOfFlowControl(String line) throws CodeStandarException{
         if (!line.trim().equals("}")) {
-            String structure = "^\\s*\\}\\s*(else|finally)\\s*\\{$";
+            String structure = "^\\s*\\}\\s*(else|finally)\\s*\\{\\s*(//.*)?$";
             if (matchesPattern(line, structure)) return true;
             throw new CodeStandarException("No se cumple el formato de codigo");
         }
@@ -98,8 +99,8 @@ public class PhysicalFormatValidator extends StandardValidator{
      */
 
     private boolean hasCorrectPhysicLine(String line) throws CodeStandarException{
-        String anonotation ="^@.+[^\\s]$"; 
-        String tryDoStructure = "(try|static)\\s*\\{";
+        String anonotation ="^@\\w+(\\s*//.*)?$";
+        String tryDoStructure = "(try|static)\\s*\\{\\s*(//.*)?";
         if(hasCorrestStructure(line, anonotation, "@") || hasCorrestStructure(line, tryDoStructure, "try") |hasCorrestStructure(line, tryDoStructure, "do") ||hasCorrestStructure(line, tryDoStructure, "static"))
             return true;
         return false;
@@ -114,9 +115,10 @@ public class PhysicalFormatValidator extends StandardValidator{
      */
 
     private boolean hasCorrectDeclaration(String line) throws CodeStandarException{
-        String declaration ="^[\\w<>\\[\\]]+\\s+[\\w<>\\[\\]]+\\s*;?$";
+        String declaration ="^[\\w<>\\[\\]]+\\s+[\\w<>\\[\\]]+\\s*;?\\s*(//.*)?$";
+        String structure ="^.*?;\\s*(//.*)?$";
         if(matchesPattern(line, declaration)){
-            if (line.trim().endsWith(";")) {
+            if (matchesPattern(line, structure)) {
                 return true;
             }
             throw new CodeStandarException("Las declaraciones no cumplen el formato de codigo");
@@ -134,9 +136,10 @@ public class PhysicalFormatValidator extends StandardValidator{
      */
 
     public boolean hasCorrectEnumLit(String line) throws CodeStandarException{
-        String enumItems = "\\w+(?:,\\s*\\w+)*?;?";
+        String enumItems = "\\w+(?:,\\s*\\w+)*?;?\\s*(//.*)?";
+        String structure ="^.*?;\\s*(//.*)?$";
         if(matchesPattern(line, enumItems)){
-            if (!line.trim().endsWith(";")) {
+            if (!matchesPattern(line, structure)) {
                 throw new CodeStandarException("Las declaraciones no cumplen el formato de codigo");
             }
         return true;
