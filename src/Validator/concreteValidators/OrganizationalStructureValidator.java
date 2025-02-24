@@ -47,11 +47,9 @@ public class OrganizationalStructureValidator extends StandardValidator{
     private boolean isOrganizationalStructure(String line) throws CodeStandarException {
         String organizationalKeywords = "^(package|import)\\s+[\\w\\.]+\\*?;\\s*(//.*)?$";
         if (matchesPattern(line, organizationalKeywords)){
-            if (line.trim().endsWith(";")) {
-                return true;
-            }
-            throw new CodeStandarException("Los imports y package no cumplen el formato de codigo");
+            return true;
         } else {
+            if (line.trim().startsWith("package")||line.trim().startsWith("import")) throw new CodeStandarException("Los imports y package no cumplen el formato de codigo");
            return false;
         }
     }
