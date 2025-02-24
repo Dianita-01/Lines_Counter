@@ -1,5 +1,11 @@
 package model;
 
+/**
+ * La clase "CodeSegment" representa un segmento de código que tienen líneas lógicas y físicas
+ * 
+ * @version 1.0
+ */
+
 public class CodeSegment {
     private int physicalLines;
     private int logicalLines;

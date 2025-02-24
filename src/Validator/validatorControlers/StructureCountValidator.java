@@ -6,6 +6,11 @@ import validator.ValidatorContext.CodeValidationContext;
 import validator.ValidatorContext.StandardValidator;
 import validator.concreteValidators.*;
 
+/**
+ * La clase "StructureCountValidator" proporciona los métodos para validar el contenido de una estrucutra de definción para el conteo de líneas
+ * @version 1.0
+ */
+
 public class StructureCountValidator extends StandardValidator {
     
     CodeValidationContext codeValidationContext;
@@ -17,6 +22,14 @@ public class StructureCountValidator extends StandardValidator {
     public StructureCountValidator(){
     }
 
+    /*
+     * Valida que se cumplan las reglas de formato para el conteo de líneas físicas y lógicas de todos los validadores concretos.
+     * Cuenta una línea física al codeSegment del contexto en el caso que no pertenezca a una línea lógica y que no rompa regla de formato de las líneas físicas
+     * 
+     * @param lines que representa las lineas de un código java
+     * @return si logró validar todas las líneas del contenido de una estructura de definición
+     * @throws CodeStandarException si no está en el formato
+     */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
         while (lines.size()>0) {
@@ -36,6 +49,13 @@ public class StructureCountValidator extends StandardValidator {
         return true;
     } 
     
+    /*
+     * Verifica si las lineas pertecenen a una estrucura y cumple las reglas de acuerdo al formato
+     * 
+     * @param lines que representa las lineas de un código java
+     * @return si pertenece a una estrucura y cumple las reglas de acuerdo al formato
+     * @throws CodeStandarException si no está en el formato
+     */
     private boolean isStructuresCorrectFormat(List<String> lines) throws CodeStandarException{ 
         if (isLogicalReserverdWord(lines)) return true; 
         if (isCallFunctionOrObject(lines)) return true; 
@@ -47,6 +67,13 @@ public class StructureCountValidator extends StandardValidator {
         return false;
     }
     
+    /*
+     * Verifica si las lineas pertecenen a una estrucura y cumple las reglas de acuerdo al formato cambiando a validadores concretos
+     * 
+     * @param lines que representa las lineas de un código java
+     * @return si pertenece a una estrucura y cumple las reglas de acuerdo al formato
+     * @throws CodeStandarException si no está en el formato
+     */
     private boolean isCallFunctionOrObject(List<String> lines) throws CodeStandarException{
         this.codeValidationContext.setStandardValidator(new CallFunctionOrObjectValidator(codeValidationContext));
          return this.codeValidationContext.validate(lines) ? true : false;

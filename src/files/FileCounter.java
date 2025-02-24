@@ -8,6 +8,12 @@ import readers.ReaderFile;
 import validator.ValidatorContext.CodeValidationContext;
 import validator.validatorControlers.FileStructureValidator;
 
+/**
+ * La clase "FileCounter" proporciona los métodos que se necesitan para empezar el conteo de lineas y validación de un archivo
+ * 
+ * @version 1.0
+ */
+
 public class FileCounter {
 
     private File file;
@@ -18,14 +24,13 @@ public class FileCounter {
        this.file = file;
     }
 
+    /*
+     * Llama al CodeValidationContext para el conteo de líneas físicas y lógicas siempre y cuando sea válido el formato
+     * Instanciando el primer validador de FileStructureValidator que solo permite estructuras de organización y de estructuras de definición
+     */
     public void countLinesInFile() {
         ReaderFile readerFile = new ReaderFile();
         List<String> lines = readerFile.readFileLines(file);
-        countLogicalAndPyshicalLines(lines);
-        showResults(); 
-    }
-
-    public void countLogicalAndPyshicalLines(List<String> lines) {
         try {
             codeValidationContext = new CodeValidationContext();
             codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
@@ -35,6 +40,7 @@ public class FileCounter {
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
+        showResults(); 
     }
 
     public void showResults(){

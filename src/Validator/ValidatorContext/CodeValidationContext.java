@@ -5,6 +5,13 @@ import java.util.List;
 import exceptions.CodeStandarException;
 import model.CodeSegment;
 
+/**
+ * La clase "CodeValidationContext" almacena una referencia a uno de los objetos de los validadores concretos
+ * CodeValidationContext se comunica con el objeto de StandardValidator
+ * @version 1.0
+ */
+
+
 public class CodeValidationContext {
 
     private StandardValidator standardValidator;

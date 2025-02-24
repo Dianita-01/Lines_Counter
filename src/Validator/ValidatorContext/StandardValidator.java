@@ -7,6 +7,11 @@ import java.util.regex.Pattern;
 import exceptions.CodeStandarException;
 import model.CodeSegment;
 
+/**
+ * La clase "StandardValidator" declara el metodo específico para los validadores concretos y métoods comunes.
+ * @version 1.0
+ */
+
 public abstract class StandardValidator {
 
     protected CodeSegment codeSegment;

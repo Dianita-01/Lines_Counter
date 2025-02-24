@@ -7,6 +7,12 @@ import validator.ValidatorContext.StandardValidator;
 import validator.concreteValidators.OrganizationalStructureValidator;
 import validator.concreteValidators.StructureDefinitionValidator;
 
+/**
+ * La clase "FileStructureValidator" proporciona los métodos para validar un archivo cuente con la estrucura de un archivo como lo descrito en el formato para después validar su contenido
+ * Un archivo solo debe tener una estructura de definición y las estructuras organizacionales deben estár sobre la estructura de definción
+ * @version 1.0
+ */
+
 public class FileStructureValidator extends StandardValidator{
     
     private CodeValidationContext codeValidationContext;
@@ -20,6 +26,13 @@ public class FileStructureValidator extends StandardValidator{
         this.structureWasFound = false;
     }
 
+     /*
+     * Valida que haya una estructura de definición y que las estructuras organizacionales estén sobre la estructura de definción para el conteo de líneas
+     * 
+     * @param lines que representa las lineas de un código java
+     * @return si es una estructura de definición y está en el formato
+     * @throws CodeStandarException si no está en el formato
+     */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
         while (lines.size()>0) {
@@ -34,6 +47,13 @@ public class FileStructureValidator extends StandardValidator{
         return true;
     }
 
+     /*
+     * Valida que el formato de una estructura organizacional 
+     * 
+     * @param lines que representa las lineas de un código java
+     * @return si es una estructura de organización y está en el formato
+     * @throws CodeStandarException si no está en el formato
+     */
     private boolean isOrganizationalStructure(List<String> lines) throws CodeStandarException {
         this.codeValidationContext.setStandardValidator(new OrganizationalStructureValidator(this.codeValidationContext));
         return this.codeValidationContext.validate(lines);
@@ -50,6 +70,11 @@ public class FileStructureValidator extends StandardValidator{
         }
     }
     
+    /*
+     * Asigna si la estructura de definciión ha sido encontrada
+     * 
+     * @param lines que representa las lineas de un código java
+     */
     public void setStructureWasFound(boolean structureWasFound) {
         this.structureWasFound = structureWasFound;
     }
