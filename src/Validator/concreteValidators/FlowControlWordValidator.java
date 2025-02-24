@@ -80,7 +80,7 @@ public class FlowControlWordValidator extends StandardValidator{
         String structure ="^.*?\\{\\s*(//.*)?$";
         while (lines.size()>0) {
             if (matchesPattern(lines.get(0).trim(), structure)) {
-                    if (lines.get(0).trim().endsWith("{")) {
+                    if (lines.get(0).trim().startsWith("{")) {
                         if (lines.get(0).trim().startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
                         this.codeValidationContext.addPhysicalLine();
                         return true;
