@@ -45,7 +45,7 @@ public class CallFunctionOrObjectValidator extends StandardValidator{
      */
 
     private boolean isCallFuctionOrObject(String line) {
-        String structure = "^[\\w\\s*\\.\\s*]+(\\(\\.*\\)\\s*\\.\\s*)*\\s*\\w+\\s*\\(.*\\)\\s*;$";
+        String structure = "^[\\w\\s*\\.\\s*]+(\\(\\.*\\)\\s*\\.\\s*)*\\s*\\w+\\s*\\(.*\\)\\s*;\\s*(//.*)?$";
         return matchesPattern(line.trim(), structure);
     }
 
@@ -58,8 +58,8 @@ public class CallFunctionOrObjectValidator extends StandardValidator{
      * @throws CodeStandarException si es llamada a método o método de objeto y no está en el formato
      */
     private boolean isIncompleteCallFuctionOrObject(List<String> lines) throws CodeStandarException{
-        String structure = "^[\\w\\s*\\.\\s*]+(\\(\\.*\\)\\s*\\.\\s*)*\\s*\\w+\\s*\\(.*\\)?\\s*[^;]$";
-        if (matchesPattern(lines.get(0).trim(), structure) && !lines.get   (0).trim().endsWith(";")) {
+        String structure = "^[\\w\\s*\\.\\s*]+(\\(\\.*\\)\\s*\\.\\s*)*\\s*\\w+\\s*\\(.*\\)?\\s*(//.*)?$";
+        if (matchesPattern(lines.get(0).trim(), structure)) {
             return findEndOfLine(lines);
         }
         return false;
@@ -73,9 +73,10 @@ public class CallFunctionOrObjectValidator extends StandardValidator{
      * @throws CodeStandarException si es una estrucura de llamada a método o método de objeto  y no está en el formato
      */
     public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
+        String structure ="^.*?;\\s*(//.*)?$";
         lines.remove(0);
         while (lines.size()>0) {
-            if (lines.get(0).trim().endsWith(";")) {
+            if (matchesPattern(lines.get(0).trim(), structure)) {
                 if (lines.get(0).trim().startsWith(";")) throw new CodeStandarException("No se cumple el formato de codigo");
                 this.codeValidationContext.addPhysicalLine();
                 return true;

@@ -1,10 +1,10 @@
-package Validator.concreteValidators;
+package validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import Validator.ValidatorContext.CodeValidationContext;
-import Validator.ValidatorContext.StandardValidator;
+import validator.validatorContext.CodeValidationContext;
+import validator.validatorContext.StandardValidator;
 
 /**
  * La clase "FunctionStructureValidator" proporciona los métodos para validar una formato de firmas de funciones para poder hacer la suma de lineas físicas solo
@@ -48,13 +48,10 @@ public class FunctionStructureValidator extends StandardValidator{
 
 
     private boolean isFunction(String line) throws CodeStandarException{
-        String structureFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\{?";
-        String structureStaticFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\;?";
+        String structureFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\{?\\s*(//.*)?";
+        String structureStaticFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\;?\\s*(//.*)?";
         if (matchesPattern(line.trim(), structureFunction) || matchesPattern(line.trim(), structureStaticFunction)){
-            if (line.trim().endsWith("{") || line.trim().endsWith(";")) {
-                return true;
-            }
-            throw new CodeStandarException("Las funciones no cumplen con el formato de código");
+           return true;
         } else {
            return false;
         }
@@ -86,22 +83,18 @@ public class FunctionStructureValidator extends StandardValidator{
         
     public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
         lines.remove(0);
-        String structureFunction = ".*\\)\\s*.*\\{?";
-        String structureStaticFunction = ".*\\)\\s*.*\\;?";
+        String structureFunction ="^.*?\\{\\s*(//.*)?$";
+        String structureStaticFunction ="^.*?\\;\\s*(//.*)?$";
         while (lines.size()>0) {
             if (matchesPattern(lines.get(0).trim(), structureFunction) || matchesPattern(lines.get(0).trim(), structureStaticFunction)) {
-                    if (lines.get(0).trim().endsWith("{") || lines.get(0).trim().endsWith(";")) {
-                        if (lines.get(0).trim().startsWith("{") || lines.get(0).trim().startsWith(";")) throw new CodeStandarException("No se cumple el formato de codigo");
-                        this.codeValidationContext.addPhysicalLine();
-                        return true;
-                    } else {
-                        throw new CodeStandarException("Estructura de control invalida");
-                    }
+                if (lines.get(0).trim().startsWith("{") || lines.get(0).trim().startsWith(";")) throw new CodeStandarException("No se cumple el formato de codigo");
+                    this.codeValidationContext.addPhysicalLine();
+                    return true;
             }
-                if(lines.size()>0) lines.remove(0);
-                this.codeValidationContext.addPhysicalLine();
+            if(lines.size()>0) lines.remove(0);
+            this.codeValidationContext.addPhysicalLine();
         }
-        if(lines.size()<0) throw new CodeStandarException("No se cumple el formato de codigo");
+        if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo");
         return false;
     }
     

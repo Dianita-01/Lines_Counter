@@ -1,10 +1,10 @@
-package Validator.concreteValidators;
+package validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import Validator.ValidatorContext.CodeValidationContext;
-import Validator.ValidatorContext.StandardValidator;
+import validator.validatorContext.CodeValidationContext;
+import validator.validatorContext.StandardValidator;
 
 /**
  * La clase "LambdasValidator" proporciona los métodos para validar una formato de lambdas para poder hacer la suma de lineas lógicas y físicas solo
@@ -43,8 +43,8 @@ public class LambdasValidator extends StandardValidator{
      * @return si es una lambda completa
      */
     private boolean isLambdaStructure(String line) {
-        String lambdaInLine = "^\\s*\\(\\.\\)\\s*->\\s*\\.\\s*$"; //noprobado
-        String lambdaBlock = "^\\s*\\(\\.\\)\\s*->\\s*\\{*$"; 
+        String lambdaInLine = "^\\s*\\(\\.\\)\\s*->\\s*\\.\\s*(//.*)?$"; //noprobado
+        String lambdaBlock = "^\\s*\\(\\.\\)\\s*->\\s*\\{?\\s*(//.*)?$"; 
         if (matchesPattern(line, lambdaBlock) || matchesPattern(line, lambdaInLine)){
            return true;           
         } else {

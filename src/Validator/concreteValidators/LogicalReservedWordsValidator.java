@@ -42,7 +42,7 @@ public class LogicalReservedWordsValidator extends StandardValidator{
      * @return si es una palabras reservada lógica
      */
     public boolean hasLogicalReserverWords(String line){
-        String reservedKeywords = "^(case|break|continue|return|throw)\\s*.*$";
+        String reservedKeywords = "^(case|break|continue|return|throw)\\s*.*\\s*(//.*)?$";
         return matchesPattern(line, reservedKeywords) ? true : false;
     }
 

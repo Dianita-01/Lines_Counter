@@ -45,7 +45,7 @@ public class OrganizationalStructureValidator extends StandardValidator{
      */
 
     private boolean isOrganizationalStructure(String line) throws CodeStandarException {
-        String organizationalKeywords = "^(package|import)\\s+[\\w\\.]+\\*?;?$";
+        String organizationalKeywords = "^(package|import)\\s+[\\w\\.]+\\*?;\\\\s*(//.*)?$";
         if (matchesPattern(line, organizationalKeywords)){
             if (line.trim().endsWith(";")) {
                 return true;
