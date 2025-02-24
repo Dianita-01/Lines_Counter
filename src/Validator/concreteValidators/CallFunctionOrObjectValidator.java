@@ -1,10 +1,10 @@
-package Validator.concreteValidators;
+package validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
-import Validator.ValidatorContext.CodeValidationContext;
-import Validator.ValidatorContext.StandardValidator;
+import validator.validatorContext.CodeValidationContext;
+import validator.validatorContext.StandardValidator;
 
 /**
  * La clase "CallFunctionOrObjectValidator" proporciona los métodos para validar una formato de llamada a un método o objeto para poder hacer la suma de lineas lógicas

@@ -1,12 +1,11 @@
-package Validator.concreteValidators;
+package validator.concreteValidators;
 
 import java.util.List;
 
 import exceptions.CodeStandarException;
 
-import javax.xml.validation.Validator;
-import Validator.ValidatorContext.CodeValidationContext;
-import Validator.ValidatorContext.StandardValidator;
+import validator.validatorContext.CodeValidationContext;
+import validator.validatorContext.StandardValidator;
 
 /**
  * La clase "AssigmentValidator" proporciona los métodos para validar una formato de asignación para poder hacer la suma de lineas lógicas y físicas solo
