@@ -18,8 +18,8 @@ public class DirectoryFileCounter {
 
         for (File file : files) {
             if (file.isFile() && file.getName().endsWith(".java")) {
-                FileCounter fileCounter = new FileCounter();
-                fileCounter.countLinesInFile(file);
+                FileCounter fileCounter = new FileCounter(file);
+                fileCounter.countLinesInFile();
             }
         }
     }
