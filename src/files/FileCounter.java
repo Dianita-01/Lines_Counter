@@ -42,7 +42,6 @@ public class FileCounter {
         } catch (Exception e) {
             System.out.println(this.file.getName());
             System.err.println(e.getMessage());
-            e.printStackTrace();
         }
         
     }
