@@ -21,8 +21,8 @@ public class HandleInput {
         File file = new File(path);
 
         if (file.isDirectory()) {
-            DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter();
-            directoryFileCounter.countLinesInDirectory(file);
+            DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter(file);
+            directoryFileCounter.countLinesInDirectory();
         } else if (file.isFile()) {
             FileCounter fileCounter = new FileCounter(file);
             fileCounter.countLinesInFile();

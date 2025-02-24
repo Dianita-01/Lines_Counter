@@ -57,4 +57,8 @@ public class FileCounter {
         System.out.println("Lineas físicas: " + codeSegment.getPhysicalLines());
         System.out.println("Lineas lógicas: " + codeSegment.getLogicalLines());
     }
+
+    public CodeSegment getCodeSegment(){
+        return this.codeSegment;
+    }
 }

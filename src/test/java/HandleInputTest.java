@@ -56,6 +56,7 @@ public class HandleInputTest {
      */
     @Test
     public void testProcessInput_NoArgs_UserInput() {
+
         String simulatedInput = "testPath";
         InputStream originalSystemIn = System.in;
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
