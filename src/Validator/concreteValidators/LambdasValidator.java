@@ -43,8 +43,8 @@ public class LambdasValidator extends StandardValidator{
      * @return si es una lambda completa
      */
     private boolean isLambdaStructure(String line) {
-        String lambdaInLine = "^\\s*\\(\\.\\)\\s*->\\s*\\.\\s*(//.*)?$"; //noprobado
-        String lambdaBlock = "^\\s*\\(\\.\\)\\s*->\\s*\\{?\\s*(//.*)?$"; 
+        String lambdaInLine = "^\\s*\\(?.*\\)?\\s*->\\s*.*;\\s*(//.*)?$";
+        String lambdaBlock = "^\\s*\\(?.*\\)?\\s*->\\s*\\{\\s*(//.*)?$"; 
         if (matchesPattern(line, lambdaBlock) || matchesPattern(line, lambdaInLine)){
            return true;           
         } else {
