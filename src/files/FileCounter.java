@@ -32,17 +32,23 @@ public class FileCounter {
     public void countLinesInFile() {
         ReaderFile readerFile = new ReaderFile();
         List<String> lines = readerFile.readFileLines(file);
-        try {
-            codeValidationContext = new CodeValidationContext();
-            codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
-            codeValidationContext.validate(lines);
-            this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
-            showResults(); 
-            
-        } catch (Exception e) {
-            System.out.println(this.file.getName());
-            System.err.println(e.getMessage());
+        if (this.file.isFile() && this.file.getName().endsWith(".java")) {
+            try {
+                codeValidationContext = new CodeValidationContext();
+                codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
+                codeValidationContext.validate(lines);
+                this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
+                showResults(); 
+                
+            } catch (Exception e) {
+                System.out.println(this.file.getName());
+                System.err.println(e.getMessage());
+            }
+        } else{
+            System.out.println(this.file.getName() + " no es un archivo con extensión válida");
         }
+        
+        
         
     }
 
