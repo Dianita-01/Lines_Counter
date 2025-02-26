@@ -2,6 +2,8 @@ package com.proy.integration;
 
 import static org.junit.Assert.assertEquals;
 
+import java.io.FileNotFoundException;
+
 import org.junit.Test;
 
 import main.java.com.proy.readers.HandleInput;
@@ -13,7 +15,12 @@ public class Cap013 {
 
     public void test(){
         HandleInput reader = new HandleInput();
-        reader.processInput(this.PATH);
+        try {
+            reader.getInput(this.PATH);
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {

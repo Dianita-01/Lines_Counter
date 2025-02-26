@@ -6,6 +6,7 @@ import main.java.com.proy.readers.HandleInput;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 
 import static org.junit.Assert.*;
@@ -62,7 +63,11 @@ public class HandleInputTest {
         InputStream originalSystemIn = System.in;
         System.setIn(new ByteArrayInputStream(simulatedInput.getBytes()));
 
-        handleInput.processInput(new String[]{});
+        try {
+            handleInput.getInput(new String[]{});
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         System.setIn(originalSystemIn);
     }

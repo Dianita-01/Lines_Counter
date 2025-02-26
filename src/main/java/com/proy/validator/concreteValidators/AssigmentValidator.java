@@ -47,6 +47,7 @@ public class AssigmentValidator extends StandardValidator{
 
     public boolean isAssigment(String line) {
         String structure ="^.+\\s*=\\s*.+;\\s*(//.*)?";
+        
         return matchesPattern(line.trim(), structure);
     }
 

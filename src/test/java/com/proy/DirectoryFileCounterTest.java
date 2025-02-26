@@ -2,11 +2,9 @@ package com.proy;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
 import main.java.com.proy.readers.DirectoryFileCounter;
-import main.java.com.proy.readers.ReaderFile;
-
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -58,7 +56,11 @@ public class DirectoryFileCounterTest {
     public void testCountLinesInDirectory_validDirectory() {
         int sumLogicalLines = 0, sumPhysicalLines = 0;
         DirectoryFileCounter counter = new DirectoryFileCounter(this.validDirectory);
-        counter.countLinesInDirectory();
+        try {
+            counter.countLinesInDirectory();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
 
         for(File file : this.filesInValidDirectory){
             int logicalLines = counter.getFileCounter().getCodeSegment().getLogicalLines();
@@ -78,7 +80,11 @@ public class DirectoryFileCounterTest {
     @Test
     public void testCountLinesInDirectory_emptyDirectory() {
         DirectoryFileCounter counter = new DirectoryFileCounter(this.emptyDirectory);
-        counter.countLinesInDirectory();
+        try {
+            counter.countLinesInDirectory();
+        } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
+        }
         
         assertNull(counter.getFileCounter());        
     }

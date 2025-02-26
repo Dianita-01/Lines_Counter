@@ -1,5 +1,6 @@
 package main.java.com.proy.readers;
 import java.io.File;
+import java.io.FileNotFoundException;
 
 import main.java.com.proy.files.FileCounter;
 
@@ -11,27 +12,16 @@ public class DirectoryFileCounter {
         setDirectory(directory);
     }
 
-    public void countLinesInDirectory() {
-        if (!this.directory.isDirectory()) {
-            System.out.println("La ruta proporcionada no es un directorio.");
-            return;
-        }
-
+    public void countLinesInDirectory() throws FileNotFoundException {
+    
         File[] files = this.directory.listFiles();
-        if (files == null || files.length == 0) {
-            System.out.println("No se pudo leer el directorio.");
-            return;
+        if (doesntHaveFiles(files)) {
+            throw new FileNotFoundException("No se pudo leer el directorio :(");
+        } else{
+            countLinesInFiles(files);
         }
 
-        for (File file : files) {
-            if (file.isFile() && file.getName().endsWith(".java")) {
-                this.fileCounter = new FileCounter(file);
-                fileCounter.countLinesInFile();
-            } else if(file.isDirectory()){
-                DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter(file);
-                directoryFileCounter.countLinesInDirectory();
-            }
-        }
+        
     }
 
     public void setDirectory(File directory){
@@ -44,5 +34,21 @@ public class DirectoryFileCounter {
 
     public FileCounter getFileCounter(){
         return this.fileCounter;
+    }
+
+    private boolean doesntHaveFiles(File[] files){
+        return files == null || files.length == 0;
+    }
+
+    private void countLinesInFiles(File[] files) throws FileNotFoundException{
+        for (File file : files) {
+            if (file.isFile() && file.getName().endsWith(".java")) {
+                this.fileCounter = new FileCounter(file);
+                fileCounter.countLinesInFile();
+            } else if(file.isDirectory()){
+                DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter(file);
+                directoryFileCounter.countLinesInDirectory();
+            }
+        }
     }
 }
