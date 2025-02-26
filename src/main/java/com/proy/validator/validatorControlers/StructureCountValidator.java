@@ -58,11 +58,11 @@ public class StructureCountValidator extends StandardValidator {
      * @throws CodeStandarException si no está en el formato
      */
     private boolean isStructuresCorrectFormat(List<String> lines) throws CodeStandarException{ 
-        if (isLogicalReserverdWord(lines)) return true; 
+        if (isLogicalReserverdWord(lines)) return true;
+        if (isFunctionStructure(lines)) return true; 
         if (isCallFunctionOrObject(lines)) return true; 
         if (isFlowControlWord(lines)) return true; 
         if (isLambdaStructure(lines)) return true; 
-        if (isFunctionStructure(lines)) return true; 
         if (isControlStructure(lines)) return true; 
         if (isAssigmentDefinition(lines)) return true; 
         return false;

@@ -50,7 +50,7 @@ public class FlowControlWordValidator extends StandardValidator{
         return matchesPattern(line.trim(), structure);
     }
 
-         /*
+         /* 
      * Revisa si la primera linea del código es una flujo de control de las estructuras de control lógicas incompleta, es decir que ocurrió un salto de línea, 
      * para validar el flujo de control de las estructuras de control completa
      * 
