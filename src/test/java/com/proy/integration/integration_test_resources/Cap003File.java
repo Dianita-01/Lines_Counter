@@ -1,4 +1,4 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
 //Esta clase es para probar el caso de prubea 3
 public class Cap003File {

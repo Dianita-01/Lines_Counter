@@ -59,7 +59,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>main.java.com.proy.Main</mainClass>
+                            <mainClass>com.proy.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

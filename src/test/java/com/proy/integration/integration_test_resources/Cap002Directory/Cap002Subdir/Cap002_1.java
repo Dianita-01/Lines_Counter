@@ -1,4 +1,4 @@
-package com.proy.integration.integration_test_resources.Cap002Directory.Cap002Subdir;
+package integration.integration_test_resources.Cap002Directory.Cap002Subdir;
 
 public class Cap002_1 {
     public static void main(String[] args) {

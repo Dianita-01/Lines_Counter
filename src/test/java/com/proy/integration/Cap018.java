@@ -1,5 +1,4 @@
-package com.proy.integration;
-
+package integration;
 import java.io.FileNotFoundException;
 
 import com.proy.readers.HandleInput;

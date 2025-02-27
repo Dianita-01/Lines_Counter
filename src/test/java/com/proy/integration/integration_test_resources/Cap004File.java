@@ -1,4 +1,4 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;

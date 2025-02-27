@@ -34,6 +34,7 @@ public class FileStructureValidator extends StandardValidator{
      * @throws CodeStandarException si no está en el formato
      */
     @Override
+    
     public boolean validate(List<String> lines) throws CodeStandarException {
         while (lines.size()>0) {
             if (isCommentLine(lines.get(0)) || lines.get(0).isBlank() || isOrganizationalStructure(lines)){

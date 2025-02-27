@@ -1,4 +1,4 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 import java.beans.BeanProperty;
 import java.beans.JavaBean;
 import java.io.Serial;
