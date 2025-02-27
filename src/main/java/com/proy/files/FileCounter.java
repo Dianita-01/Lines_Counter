@@ -38,7 +38,6 @@ public class FileCounter {
                 codeValidationContext.validate(lines);
                 this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
                 this.codeSegment.setTitle(file.getName());
-                
             } catch (Exception e) {
                 System.out.println(this.file.getName());
                 System.err.println(e.getMessage());

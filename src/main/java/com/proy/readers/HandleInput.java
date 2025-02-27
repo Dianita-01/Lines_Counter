@@ -23,11 +23,12 @@ public class HandleInput {
 
     private void processPath(String path) {
         File file = new File(path);
+        PrintResults results = new PrintResults();
 
         if (file.isDirectory()) {
             DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter(file);
             Directory directory = directoryFileCounter.countLinesInDirectory();
-            showResults(directory);
+            results.printResults(directory);
         } else if (file.isFile()) {
             System.out.printf("%-30s %-30s %-30s %-30s%n", "", "Clase", "Líneas físicas", "Líneas lógicas");
             FileCounter fileCounter = new FileCounter(file);
@@ -35,45 +36,11 @@ public class HandleInput {
             CodeSegment codeSegment = fileCounter.getCodeSegment();
             Directory directory = new Directory("");
             directory.getCodeSegments().add(codeSegment);
-            showResults(directory);
+            results.printResults(directory);
 
         } else {
             System.out.println("La ruta proporcionada no es valida.");
         }
     }
-
-    private void showResults(Directory directory){
-        System.out.printf("%-30s %-30s %-30s %-30s%n", "programa", "archivo", "Líneas físicas", "Líneas lógicas");
-        showIndividualResults(directory);
-    }
-
-    private void showIndividualResults(Directory directory){
-        List<CodeSegment> codeSegments = directory.getCodeSegments();
-
-        if (codeSegments.size()>0) {
-            for(int i = 0; i <codeSegments.size(); i++) {
-                if (i == 0) {
-                    System.out.printf("%-30s %-30s %-30s %-30s%n", directory.getName(), codeSegments.get(i).getTitle(), codeSegments.get(i).getPhysicalLines(), codeSegments.get(i).getLogicalLines());
-                    
-                }else{
-                    System.out.printf("%-30s %-30s %-30s %-30s%n"," ", codeSegments.get(i).getTitle(), codeSegments.get(i).getPhysicalLines(), codeSegments.get(i).getLogicalLines());
-                }
-                directory.addPhysicalLine(codeSegments.get(i).getPhysicalLines());
-                directory.addLogicalLine(codeSegments.get(i).getLogicalLines());
-            }
-            System.out.printf("%-30s %-30s %-30s %-30s%n", "Total", "", directory.getPysicalLines(), directory.getLogicalLines());
-        }
-
-       
-
-
-        List<Directory> directories = directory.getDirectories();
-
-        if (directories.size()>0) {
-            for (int i = 0; i < directories.size(); i++) {
-                showIndividualResults(directories.get(i));
-            }
-        }
-
-    }
+    
 }
