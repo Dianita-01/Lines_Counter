@@ -8,7 +8,7 @@ public class Main {
         HandleInput handleInput = new HandleInput();
         try {
             handleInput.getInput(args);
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
         }
     }

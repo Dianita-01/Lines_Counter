@@ -37,7 +37,7 @@ public class FileCounter {
                 codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
                 codeValidationContext.validate(lines);
                 this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
-                showResults(); 
+                this.codeSegment.setTitle(file.getName());
                 
             } catch (Exception e) {
                 System.out.println(this.file.getName());
@@ -49,12 +49,6 @@ public class FileCounter {
         
         
         
-    }
-
-    public void showResults(){
-        System.out.println(this.file.getName());
-        System.out.println("Lineas físicas: " + codeSegment.getPhysicalLines());
-        System.out.println("Lineas lógicas: " + codeSegment.getLogicalLines());
     }
 
     public CodeSegment getCodeSegment(){
