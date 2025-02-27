@@ -8,7 +8,7 @@ import com.proy.model.Directory;
 public class PrintResults {
     public void printResults(Directory directory){
         System.out.println("-------------------------------------------------------------------------------------------------------------------");
-        System.out.printf("%-30s %-30s %-30s %-30s%n", "programa", "archivo", "Líneas físicas", "Líneas lógicas");
+        System.out.printf("%-30s %-30s %-30s %-30s%n", "programa", "archivo", "Lineas fisicas", "Lineas logicas");
         System.out.println("-------------------------------------------------------------------------------------------------------------------");
         showIndividualResults(directory);
     }

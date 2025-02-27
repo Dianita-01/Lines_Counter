@@ -31,7 +31,7 @@ public class HandleInput {
             Directory directory = directoryFileCounter.countLinesInDirectory();
             results.printResults(directory);
         } else if (file.isFile()) {
-            System.out.printf("%-30s %-30s %-30s %-30s%n", "", "Clase", "Líneas físicas", "Líneas lógicas");
+            System.out.printf("%-30s %-30s %-30s %-30s%n", "", "Clase", "Lineas fisicas", "Lineas logicas");
             FileCounter fileCounter = new FileCounter(file);
             fileCounter.countLinesInFile();
             CodeSegment codeSegment = fileCounter.getCodeSegment();
