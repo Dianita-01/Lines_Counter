@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.miempresa</groupId>
+    <groupId>com.proy</groupId>
     <artifactId>mi-proyecto</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -24,6 +24,45 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M7</version>
+            </plugin>
+            <plugin>
+                <groupId>com.akathist.maven.plugins.launch4j</groupId>
+                <artifactId>launch4j-maven-plugin</artifactId>
+                <version>2.1.1</version>
+                <executions>
+                    <execution>
+                        <id>l4j-clui</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>launch4j</goal>
+                        </goals>
+                        <configuration>
+                            <jar>target/${project.build.finalName}.jar</jar>
+                            <outfile>target/${project.build.finalName}.exe</outfile>
+                            <classPath>
+                                <mainClass>main.java.com.proy.Main</mainClass>
+                            </classPath>
+                            <headerType>console</headerType>
+                            <errTitle>Error</errTitle>
+                            <jre>
+                                <minVersion>17</minVersion>
+                                <jdkPreference>preferJre</jdkPreference>
+                            </jre>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.2</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <mainClass>main.java.com.proy.Main</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

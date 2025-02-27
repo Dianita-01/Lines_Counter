@@ -6,9 +6,10 @@ package main.java.com.proy.model;
  * @version 1.0
  */
 
-public class CodeSegment {
+ public class CodeSegment {
     private int physicalLines;
     private int logicalLines;
+    private String title;
 
     public CodeSegment() {
         this.physicalLines = 0;
@@ -18,6 +19,14 @@ public class CodeSegment {
     public CodeSegment(int physicalLines, int logicalLines) {
         this.physicalLines = physicalLines;
         this.logicalLines = logicalLines;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getLogicalLines() {
@@ -63,3 +72,4 @@ public class CodeSegment {
         setLogicalLines(getLogicalLines()+1);
     }
 }
+
