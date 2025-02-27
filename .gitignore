@@ -32,3 +32,7 @@ Thumbs.db
 *.log
 *.tmp
 hs_err_pid*
+
+emptyFile.txt
+testFile.txt
+testDirectory
