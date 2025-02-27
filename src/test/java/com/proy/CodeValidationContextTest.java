@@ -2,11 +2,11 @@ package com.proy;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import main.java.com.proy.exceptions.CodeStandarException;
-import main.java.com.proy.model.CodeSegment;
-import main.java.com.proy.validator.validatorContext.CodeValidationContext;
-import main.java.com.proy.validator.validatorContext.StandardValidator;
-import main.java.com.proy.validator.validatorControlers.FileStructureValidator;
+import com.proy.exceptions.CodeStandarException;
+import com.proy.model.CodeSegment;
+import com.proy.validator.validatorContext.CodeValidationContext;
+import com.proy.validator.validatorContext.StandardValidator;
+import com.proy.validator.validatorControlers.FileStructureValidator;
 
 import java.util.List;
 

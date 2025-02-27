@@ -1,4 +1,4 @@
-package main.java.com.proy.readers;
+package com.proy.readers;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

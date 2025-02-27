@@ -1,14 +1,12 @@
 package com.proy;
 
-import main.java.com.proy.validator.concreteValidators.AssigmentValidator;
-import main.java.com.proy.validator.validatorContext.CodeValidationContext;
-import main.java.com.proy.exceptions.CodeStandarException;
+import com.proy.validator.concreteValidators.AssigmentValidator;
+import com.proy.validator.validatorContext.CodeValidationContext;
+import com.proy.exceptions.CodeStandarException;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class AssigmentValidatorTest {

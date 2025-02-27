@@ -1,4 +1,4 @@
-package main.java.com.proy.model;
+package com.proy.model;
 
 /**
  * La clase "CodeSegment" representa un segmento de código que tienen líneas lógicas y físicas
@@ -9,6 +9,7 @@ package main.java.com.proy.model;
 public class CodeSegment {
     private int physicalLines;
     private int logicalLines;
+    private String title;
 
     public CodeSegment() {
         this.physicalLines = 0;
@@ -18,6 +19,14 @@ public class CodeSegment {
     public CodeSegment(int physicalLines, int logicalLines) {
         this.physicalLines = physicalLines;
         this.logicalLines = logicalLines;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getLogicalLines() {

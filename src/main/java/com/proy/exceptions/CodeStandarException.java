@@ -1,4 +1,4 @@
-package main.java.com.proy.exceptions;
+package com.proy.exceptions;
 
 public class CodeStandarException extends Exception {
         

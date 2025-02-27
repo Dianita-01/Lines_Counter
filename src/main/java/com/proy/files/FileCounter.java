@@ -1,11 +1,11 @@
-package main.java.com.proy.files;
+package com.proy.files;
 import java.io.File;
 import java.util.List;
 
-import main.java.com.proy.model.CodeSegment;
-import main.java.com.proy.readers.ReaderFile;
-import main.java.com.proy.validator.validatorContext.CodeValidationContext;
-import main.java.com.proy.validator.validatorControlers.FileStructureValidator;
+import com.proy.model.CodeSegment;
+import com.proy.readers.ReaderFile;
+import com.proy.validator.validatorContext.CodeValidationContext;
+import com.proy.validator.validatorControlers.FileStructureValidator;
 
 /**
  * La clase "FileCounter" proporciona los métodos que se necesitan para empezar el conteo de lineas y validación de un archivo
@@ -37,8 +37,7 @@ public class FileCounter {
                 codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
                 codeValidationContext.validate(lines);
                 this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
-                showResults(); 
-                
+                this.codeSegment.setTitle(file.getName());
             } catch (Exception e) {
                 System.out.println(this.file.getName());
                 System.err.println(e.getMessage());
@@ -50,13 +49,6 @@ public class FileCounter {
         
         
     }
-
-    public void showResults(){
-        System.out.println(this.file.getName());
-        System.out.println("Lineas físicas: " + codeSegment.getPhysicalLines());
-        System.out.println("Lineas lógicas: " + codeSegment.getLogicalLines());
-    }
-
     public CodeSegment getCodeSegment(){
         return this.codeSegment;
     }

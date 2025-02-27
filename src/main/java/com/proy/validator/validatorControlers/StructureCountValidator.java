@@ -1,11 +1,11 @@
-package main.java.com.proy.validator.validatorControlers;
+package com.proy.validator.validatorControlers;
 
 import java.util.List;
 
-import main.java.com.proy.exceptions.CodeStandarException;
-import main.java.com.proy.validator.concreteValidators.*;
-import main.java.com.proy.validator.validatorContext.CodeValidationContext;
-import main.java.com.proy.validator.validatorContext.StandardValidator;
+import com.proy.exceptions.CodeStandarException;
+import com.proy.validator.concreteValidators.*;
+import com.proy.validator.validatorContext.CodeValidationContext;
+import com.proy.validator.validatorContext.StandardValidator;
 
 /**
  * La clase "StructureCountValidator" proporciona los métodos para validar el contenido de una estrucutra de definción para el conteo de líneas

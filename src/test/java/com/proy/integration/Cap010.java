@@ -1,7 +1,7 @@
 package com.proy.integration;
 
 import java.io.FileNotFoundException;
-import main.java.com.proy.readers.HandleInput;
+import com.proy.readers.HandleInput;
 
 public class Cap010 {
     private final String[] PATH = {

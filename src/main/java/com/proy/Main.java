@@ -1,7 +1,7 @@
-package main.java.com.proy;
+package com.proy;
 import java.io.FileNotFoundException;
 
-import main.java.com.proy.readers.HandleInput;
+import com.proy.readers.HandleInput;
 
 public class Main {
     public static void main(String[] args) {

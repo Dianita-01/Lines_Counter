@@ -1,8 +1,8 @@
 package com.proy;
 
-import main.java.com.proy.exceptions.CodeStandarException;
-import main.java.com.proy.validator.concreteValidators.StructureDefinitionValidator;
-import main.java.com.proy.validator.validatorContext.CodeValidationContext;
+import com.proy.exceptions.CodeStandarException;
+import com.proy.validator.concreteValidators.StructureDefinitionValidator;
+import com.proy.validator.validatorContext.CodeValidationContext;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;

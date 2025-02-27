@@ -2,7 +2,7 @@ package com.proy;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import main.java.com.proy.readers.DirectoryFileCounter;
+import com.proy.readers.DirectoryFileCounter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

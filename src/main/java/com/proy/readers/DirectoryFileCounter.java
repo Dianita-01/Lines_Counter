@@ -1,8 +1,10 @@
-package main.java.com.proy.readers;
+package com.proy.readers;
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import main.java.com.proy.files.FileCounter;
+import com.proy.files.FileCounter;
+import com.proy.model.CodeSegment;
+import com.proy.model.Directory;
 
 public class DirectoryFileCounter {
     private File directory;
@@ -12,14 +14,15 @@ public class DirectoryFileCounter {
         setDirectory(directory);
     }
 
-    public void countLinesInDirectory() throws FileNotFoundException {
-    
+    public Directory countLinesInDirectory() throws FileNotFoundException {
+        Directory directory=  new Directory(this.directory.getName());
         File[] files = this.directory.listFiles();
         if (doesntHaveFiles(files)) {
-            throw new FileNotFoundException("No se pudo leer el directorio :(");
+            return directory;
         } else{
-            countLinesInFiles(files);
+            countLinesInFiles(files, directory);
         }
+        return directory;
 
         
     }
@@ -40,15 +43,18 @@ public class DirectoryFileCounter {
         return files == null || files.length == 0;
     }
 
-    private void countLinesInFiles(File[] files) throws FileNotFoundException{
+    private Directory countLinesInFiles(File[] files, Directory directory) throws FileNotFoundException{
         for (File file : files) {
             if (file.isFile() && file.getName().endsWith(".java")) {
                 this.fileCounter = new FileCounter(file);
                 fileCounter.countLinesInFile();
+                CodeSegment codeSegment = fileCounter.getCodeSegment();
+                directory.getCodeSegments().add(codeSegment);
             } else if(file.isDirectory()){
                 DirectoryFileCounter directoryFileCounter = new DirectoryFileCounter(file);
-                directoryFileCounter.countLinesInDirectory();
-            }
+                directory.getDirectories().add(directoryFileCounter.countLinesInDirectory());
+            }   
         }
+        return directory;
     }
 }

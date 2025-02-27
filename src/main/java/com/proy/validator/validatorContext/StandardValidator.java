@@ -1,11 +1,11 @@
-package main.java.com.proy.validator.validatorContext;
+package com.proy.validator.validatorContext;
 
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import main.java.com.proy.exceptions.CodeStandarException;
-import main.java.com.proy.model.CodeSegment;
+import com.proy.exceptions.CodeStandarException;
+import com.proy.model.CodeSegment;
 
 /**
  * La clase "StandardValidator" declara el metodo específico para los validadores concretos y métoods comunes.

@@ -1,4 +1,4 @@
-package main.java.com.proy.validator;
+package com.proy.validator;
 public class Rules {
     
 }

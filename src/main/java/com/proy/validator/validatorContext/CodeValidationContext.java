@@ -1,9 +1,9 @@
-package main.java.com.proy.validator.validatorContext;
+package com.proy.validator.validatorContext;
 
 import java.util.List;
 
-import main.java.com.proy.exceptions.CodeStandarException;
-import main.java.com.proy.model.CodeSegment;
+import com.proy.exceptions.CodeStandarException;
+import com.proy.model.CodeSegment;
 
 /**
  * La clase "CodeValidationContext" almacena una referencia a uno de los objetos de los validadores concretos

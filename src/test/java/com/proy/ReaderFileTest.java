@@ -2,7 +2,7 @@ package com.proy;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.com.proy.readers.ReaderFile;
+import com.proy.readers.ReaderFile;
 
 import java.io.File;
 import java.io.FileWriter;

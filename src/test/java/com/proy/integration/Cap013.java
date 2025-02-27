@@ -1,16 +1,11 @@
 package com.proy.integration;
 
-import static org.junit.Assert.assertEquals;
-
 import java.io.FileNotFoundException;
-
-import org.junit.Test;
-
-import main.java.com.proy.readers.HandleInput;
+import com.proy.readers.HandleInput;
 
 public class Cap013 {
     private final String[] PATH = {
-        "src\\test\\java\\com\\proy\\integration\\integration_test_resources\\InterfacesTest.java"
+        "src\\test\\java\\com\\proy\\integration\\integration_test_resources\\Cap013File.java"
     };
 
     public void test(){

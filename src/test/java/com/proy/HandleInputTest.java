@@ -2,7 +2,7 @@ package com.proy;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.com.proy.readers.HandleInput;
+import com.proy.readers.HandleInput;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;

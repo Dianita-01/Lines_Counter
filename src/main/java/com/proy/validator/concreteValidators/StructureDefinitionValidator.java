@@ -1,10 +1,10 @@
-package main.java.com.proy.validator.concreteValidators;
+package com.proy.validator.concreteValidators;
 
 import java.util.List;
 
-import main.java.com.proy.exceptions.CodeStandarException;
-import main.java.com.proy.validator.validatorContext.CodeValidationContext;
-import main.java.com.proy.validator.validatorContext.StandardValidator;
+import com.proy.exceptions.CodeStandarException;
+import com.proy.validator.validatorContext.CodeValidationContext;
+import com.proy.validator.validatorContext.StandardValidator;
 
 /**
  * La clase "StructureDefinitionValidator" proporciona los métodos para validar una formato de estructuras de definción para poder hacer la suma de lineas físicas solo
