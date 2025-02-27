@@ -1,8 +1,4 @@
-package test.java.com.proy.integration.integration_test_resources;
-
-// Archivo: Cap07File.java
-// Líneas físicas: 7
-// Líneas lógicas: 2
+package com.proy.integration.integration_test_resources;
 
 public abstract class Cap007File {
     public abstract void metodoAbstracto();

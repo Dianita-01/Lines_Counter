@@ -1,6 +1,4 @@
-package test.java.com.proy.integration;
-
-// Archivo: Cap012.java
+package com.proy.integration;
 
 import java.io.FileNotFoundException;
 import main.java.com.proy.readers.HandleInput;

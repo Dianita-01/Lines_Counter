@@ -1,6 +1,4 @@
-package test.java.com.proy.integration.integration_test_resources;
-
-// Archivo: Cap10File.java
+package com.proy.integration.integration_test_resources;
 
 public class Cap010File implements Cap010Interface {
     @Override

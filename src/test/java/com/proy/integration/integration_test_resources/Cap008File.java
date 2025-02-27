@@ -1,8 +1,4 @@
-package test.java.com.proy.integration.integration_test_resources;
-
-// Archivo: Cap08File.java
-// Líneas físicas: 8
-// Líneas lógicas: 3
+package com.proy.integration.integration_test_resources;
 
 public class Cap008File extends Cap007File {
     @Override
