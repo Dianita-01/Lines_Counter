@@ -1,14 +1,15 @@
 package com.proy.integration;
 
 import java.io.FileNotFoundException;
+
 import com.proy.readers.HandleInput;
 
-public class Cap008 {
+public class Cap016 {
     private final String[] PATH = {
-        "src\\test\\java\\com\\proy\\integration\\integration_test_resources\\Cap008File.java"
+        "src\\test\\java\\com\\proy\\integration\\integration_test_resources\\Cap016File.java"
     };
 
-    public void test() {
+    public void test(){
         HandleInput reader = new HandleInput();
         try {
             reader.getInput(this.PATH);
@@ -19,7 +20,7 @@ public class Cap008 {
     }
 
     public static void main(String[] args) {
-        Cap008 cap08 = new Cap008();
-        cap08.test();
+        Cap016 cap016 = new Cap016();
+        cap016.test();
     }
 }
