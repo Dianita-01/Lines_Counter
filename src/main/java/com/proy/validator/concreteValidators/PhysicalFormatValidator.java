@@ -103,7 +103,7 @@ public class PhysicalFormatValidator extends StandardValidator{
     private boolean hasCorrectPhysicLine(String line) throws CodeStandarException{
         String anonotation ="^@\\w+(\\s*//.*)?$";
         String tryDoStructure = "(try|static)\\s*\\{\\s*(//.*)?";
-        if(hasCorrestStructure(line, anonotation, "@") || hasCorrestStructure(line, tryDoStructure, "try") |hasCorrestStructure(line, tryDoStructure, "do") ||hasCorrestStructure(line, tryDoStructure, "static"))
+        if(hasCorrestStructure(line, anonotation, "@") || hasCorrestStructure(line, tryDoStructure, "try ") |hasCorrestStructure(line, tryDoStructure, "do ") ||hasCorrestStructure(line, tryDoStructure, "static "))
             return true;
         return false;
     }
