@@ -14,10 +14,8 @@ import com.proy.validator.validatorContext.StandardValidator;
 
  public class LambdasValidator extends StandardValidator{
 
-    private CodeValidationContext codeValidationContext;
-
     public LambdasValidator(CodeValidationContext codeValidationContext){
-        this.codeValidationContext = codeValidationContext;
+        super(codeValidationContext);
     }
 
     /*
@@ -30,7 +28,7 @@ import com.proy.validator.validatorContext.StandardValidator;
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
         if(isLambdaStructure(lines.get(0))){
-            this.codeValidationContext.addLogicalAndPhysicalLine();
+            getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         }
         return false;

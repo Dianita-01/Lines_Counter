@@ -5,7 +5,7 @@ import java.util.List;
 import com.proy.model.CodeSegment;
 import com.proy.readers.ReaderFile;
 import com.proy.validator.validatorContext.CodeValidationContext;
-import com.proy.validator.validatorControlers.FileStructureValidator;
+import com.proy.validator.validatorControlers.StructureCountValidator;
 
 /**
  * La clase "FileCounter" proporciona los métodos que se necesitan para empezar el conteo de lineas y validación de un archivo
@@ -31,16 +31,18 @@ public class FileCounter {
     public void countLinesInFile() {
         ReaderFile readerFile = new ReaderFile();
         List<String> lines = readerFile.readFileLines(file);
+        int numLines = lines.size();
         if (this.file.isFile() && this.file.getName().endsWith(".java")) {
             try {
                 codeValidationContext = new CodeValidationContext();
-                codeValidationContext.setStandardValidator(new FileStructureValidator(codeValidationContext));
+                codeValidationContext.setStandardValidator(new StructureCountValidator(codeValidationContext));
                 codeValidationContext.validate(lines);
                 this.codeSegment = new CodeSegment(codeValidationContext.getPhysicalLines(), codeValidationContext.getLogicalLines());
                 this.codeSegment.setTitle(file.getName());
             } catch (Exception e) {
+                int errorLine = numLines-lines.size()+1;
                 System.out.println(this.file.getName());
-                System.err.println(e.getMessage());
+                System.err.println(e.getMessage()+ "Línea. "+errorLine);
             }
         } else{
             System.out.println(this.file.getName() + " no es un archivo con extensión válida");

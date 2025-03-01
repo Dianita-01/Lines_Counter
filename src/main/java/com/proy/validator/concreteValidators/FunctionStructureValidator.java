@@ -13,11 +13,9 @@ import com.proy.validator.validatorContext.StandardValidator;
  */
 
 public class FunctionStructureValidator extends StandardValidator{
-    
-    private CodeValidationContext codeValidationContext;
 
     public FunctionStructureValidator(CodeValidationContext codeValidationContext){
-        this.codeValidationContext = codeValidationContext;
+        super(codeValidationContext);
     }
 
        /*
@@ -29,13 +27,12 @@ public class FunctionStructureValidator extends StandardValidator{
      */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (isFunction(lines.get(0)) || isIncompleteFunction(lines)) {
-            this.codeValidationContext.addPhysicalLine();
+        if (isIncorrectStructure(lines.get(0)) || isFunction(lines.get(0)) || isIncompleteFunction(lines)) {
+            getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         } else  {
             return false;
         }
-
     }
 
     /*
@@ -49,12 +46,19 @@ public class FunctionStructureValidator extends StandardValidator{
 
     private boolean isFunction(String line) throws CodeStandarException{
         String structureFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\{?\\s*(//.*)?";
-        String structureStaticFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\;?\\s*(//.*)?";
-        if (matchesPattern(line.trim(), structureFunction) || matchesPattern(line.trim(), structureStaticFunction)){
+        if (matchesPattern(line.trim(), structureFunction)){
            return true;
         } else {
            return false;
         }
+    }
+
+    private boolean isIncorrectStructure(String line) throws CodeStandarException{
+        String structureFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\s*\\{.*\\}\\{?\\s*(//.*)?";
+        if(matchesPattern(line.trim(), structureFunction)){
+            throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
+        }
+        return false;
     }
 
      /*
@@ -70,31 +74,6 @@ public class FunctionStructureValidator extends StandardValidator{
         if (matchesPattern(lines.get(0).trim(), structure)) {
            return findEndOfLine(lines);
         }
-        return false;
-    }
-
-     /*
-     * Revisa las lineas de código hasta encontrar el final de linea de la función
-     * 
-     * @param lines representa la lineas de código a validar
-     * @return si es una función con salto de línea con formato correcto
-     * @throws CodeStandarException si es una estrucura de función y no está en el formato
-     */
-        
-    public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
-        lines.remove(0);
-        String structureFunction ="^.*?\\{\\s*(//.*)?$";
-        String structureStaticFunction ="^.*?\\;\\s*(//.*)?$";
-        while (lines.size()>0) {
-            if (matchesPattern(lines.get(0).trim(), structureFunction) || matchesPattern(lines.get(0).trim(), structureStaticFunction)) {
-                if (lines.get(0).trim().startsWith("{") || lines.get(0).trim().startsWith(";")) throw new CodeStandarException("No se cumple el formato de codigo");
-                    this.codeValidationContext.addPhysicalLine();
-                    return true;
-            }
-            if(lines.size()>0) lines.remove(0);
-            this.codeValidationContext.addPhysicalLine();
-        }
-        if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo");
         return false;
     }
     

@@ -14,10 +14,8 @@ import com.proy.validator.validatorContext.StandardValidator;
 
 public class OrganizationalStructureValidator extends StandardValidator{
 
-    private CodeValidationContext codeValidationContext;
-
     public OrganizationalStructureValidator(CodeValidationContext codeValidationContext){
-        this.codeValidationContext = codeValidationContext;
+        super(codeValidationContext);
     }
     /*
      * Cuenta una línea de código física si la linea o lineas representan una estructura organizacional
@@ -30,7 +28,7 @@ public class OrganizationalStructureValidator extends StandardValidator{
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
         if(isOrganizationalStructure(lines.get(0))){
-            this.codeValidationContext.addPhysicalLine();
+            getCodeValidationContext().addPhysicalLine();
             return true;
         }else{
             return false;
@@ -45,11 +43,13 @@ public class OrganizationalStructureValidator extends StandardValidator{
      */
 
     private boolean isOrganizationalStructure(String line) throws CodeStandarException {
-        String organizationalKeywords = "^(package|import)\\s+[\\w\\.]+\\*?;\\s*(//.*)?$";
+        String organizationalKeywords = "^(package|import)\\s+(static)?\\s*[\\w\\.]+\\*?;\\s*(//.*)?$";
         if (matchesPattern(line, organizationalKeywords)){
             return true;
         } else {
-            if (line.trim().startsWith("package")||line.trim().startsWith("import")) throw new CodeStandarException("Los imports y package no cumplen el formato de codigo");
+            if (line.trim().startsWith("package ")||line.trim().startsWith("import ")){
+                throw new CodeStandarException("Los imports y package no cumplen el formato de codigo");
+            }
            return false;
         }
     }
