@@ -6,20 +6,14 @@ import com.proy.exceptions.CodeStandarException;
 import com.proy.validator.validatorContext.CodeValidationContext;
 import com.proy.validator.validatorContext.StandardValidator;
 
-/**
- * La clase "LambdasValidator" proporciona los métodos para validar una formato de lambdas para poder hacer la suma de lineas lógicas y físicas solo
- * en caso de ser un estructura de lambdas
- * @version 1.0
- */
+public class TernaryStructureValidator extends StandardValidator{
 
- public class LambdasValidator extends StandardValidator{
-
-    public LambdasValidator(CodeValidationContext codeValidationContext){
+    public TernaryStructureValidator(CodeValidationContext codeValidationContext){
         super(codeValidationContext);
     }
 
     /*
-     * Cuenta una línea de código física y lógica si la linea o lineas representan una lambda y está en el formato
+     *
      * 
      * @param lines que representa las lineas de un código java
      * @return si es una estructura de lambdas y está en el formato
@@ -27,7 +21,7 @@ import com.proy.validator.validatorContext.StandardValidator;
      */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if(isLambdaStructure(lines.get(0))){
+        if(isTernaryStructure(lines.get(0))){
             getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         }
@@ -40,10 +34,9 @@ import com.proy.validator.validatorContext.StandardValidator;
      * @param line representa la linea de código a validar
      * @return si es una lambda completa
      */
-    private boolean isLambdaStructure(String line) {
-        String lambdaInLine = "^\\s*\\(?.*\\)?\\s*->\\s*.*;\\s*(//.*)?$";
-        String lambdaBlock = "^\\s*\\(?.*\\)?\\s*->\\s*\\{\\s*(//.*)?$"; 
-        if (matchesPattern(line.trim(), lambdaBlock) || matchesPattern(line.trim(), lambdaInLine)){
+    private boolean isTernaryStructure(String line) {
+        String TernaryInLine = "^((?:[^\"\']*|\"[^\"]*\"|\'[^\']*\')*)\\?.*\\s*(//.*)?$";
+        if (matchesPattern(line.trim(), TernaryInLine)){
            return true;           
         } else {
            return false;

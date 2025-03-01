@@ -78,7 +78,9 @@ public class StructureCountValidator extends StandardValidator {
      * @throws CodeStandarException si no está en el formato
      */
     private boolean isStructuresCorrectFormat(List<String> lines) throws CodeStandarException{ 
-        if (isControlStructure(lines) || isFunctionStructure(lines) ||isTryDoStatic(lines)||isFlowControlWord(lines)||isLambdaStructure(lines)||isPhysicalCorrectFormat(lines)){
+        if (isControlStructure(lines) || isFunctionStructure(lines) ||isTryDoStatic(lines)||isFlowControlWord(lines)||isLambdaStructure(lines)||isTernaryStructure(lines)){
+            return true;
+        } else if(isPhysicalCorrectFormat(lines)){
             return true;
         }
         return false;
@@ -128,6 +130,11 @@ public class StructureCountValidator extends StandardValidator {
 
     private boolean isLambdaStructure(List<String> lines) throws CodeStandarException {
         getCodeValidationContext().setStandardValidator(new LambdasValidator(getCodeValidationContext()));
+        return getCodeValidationContext().validate(lines) ? true : false;
+    }
+
+    private boolean isTernaryStructure(List<String> lines) throws CodeStandarException {
+        getCodeValidationContext().setStandardValidator(new TernaryStructureValidator(getCodeValidationContext()));
         return getCodeValidationContext().validate(lines) ? true : false;
     }
 
