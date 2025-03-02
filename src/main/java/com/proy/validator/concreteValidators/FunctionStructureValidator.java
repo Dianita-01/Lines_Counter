@@ -27,7 +27,9 @@ public class FunctionStructureValidator extends StandardValidator{
      */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (isIncorrectStructure(lines.get(0)) || isFunction(lines.get(0)) || isIncompleteFunction(lines)) {
+        if (isAbstractFunction(lines.get(0))){
+            return false;
+        }else if(isIncorrectStructure(lines.get(0)) || isFunction(lines.get(0)) || isIncompleteFunction(lines)) {
             getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         } else  {
@@ -46,13 +48,12 @@ public class FunctionStructureValidator extends StandardValidator{
 
     private boolean isFunction(String line) throws CodeStandarException{
         String structureFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\{?\\s*(//.*)?";
-        String structureStaticFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\;\\s*(//.*)?";
-        if (matchesPattern(line.trim(), structureFunction)){
-           return true;
-        } else if( matchesPattern(line.trim(), structureStaticFunction)){
-           return false;
-        } 
-        return false;
+        return matchesPattern(line.trim(), structureFunction);
+    }
+
+    public boolean isAbstractFunction(String line) throws CodeStandarException{
+        String structureAbstractFunction ="^(\\w+\\s+)*(abstract)\\s+\\w+\\s+\\w+\\s*\\(.*$";
+        return matchesPattern(line.trim(), structureAbstractFunction);
     }
 
     private boolean isIncorrectStructure(String line) throws CodeStandarException{
