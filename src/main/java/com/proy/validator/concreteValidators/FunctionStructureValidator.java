@@ -27,7 +27,7 @@ public class FunctionStructureValidator extends StandardValidator{
      */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (isAbstractFunction(lines.get(0))){
+        if (isAbstractInterfaceFunction(lines.get(0))){
             return false;
         }else if(isIncorrectStructure(lines.get(0)) || isFunction(lines.get(0)) || isIncompleteFunction(lines)) {
             getCodeValidationContext().addLogicalAndPhysicalLine();
@@ -51,9 +51,10 @@ public class FunctionStructureValidator extends StandardValidator{
         return matchesPattern(line.trim(), structureFunction);
     }
 
-    public boolean isAbstractFunction(String line) throws CodeStandarException{
+    public boolean isAbstractInterfaceFunction(String line) throws CodeStandarException{
         String structureAbstractFunction ="^(\\w+\\s+)*(abstract)\\s+\\w+\\s+\\w+\\s*\\(.*$";
-        return matchesPattern(line.trim(), structureAbstractFunction);
+        String structureInterfaceFunction ="^(\\w+\\s+)*(abstract\\s+)?\\s*\\w+\\s+\\w+\\s*\\(.*\\)\\S*;$";
+        return matchesPattern(line.trim(), structureAbstractFunction) || matchesPattern(line.trim(), structureInterfaceFunction);
     }
 
     private boolean isIncorrectStructure(String line) throws CodeStandarException{
@@ -80,4 +81,33 @@ public class FunctionStructureValidator extends StandardValidator{
         return false;
     }
     
+    
+    public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
+        lines.remove(0);
+        String endLine ="^.*?\\{\\s*(//.*)?$";
+        String EndLineInterfaceAbstract ="^.*?\\;\\s*(//.*)?$";
+        while (lines.size()>0) {
+            if (isCommentLine(lines.get(0).trim())) {
+                lines.remove(0);
+            } else if (matchesPattern(lines.get(0).trim(), EndLineInterfaceAbstract)) {
+                lines.remove(0);
+                return false;
+            } else if (matchesPattern(lines.get(0).trim(), endLine)) {
+                if (lines.get(0).trim().startsWith("{")){
+                    throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
+                }
+                getCodeValidationContext().addPhysicalLine();
+                return true;
+            }
+            if(lines.size()>0){
+                lines.remove(0);
+            }
+            getCodeValidationContext().addPhysicalLine();
+        }
+
+        if(lines.size()<=0){
+            throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
+        }
+        return false;
+    }
 }
