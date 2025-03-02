@@ -41,7 +41,7 @@ import com.proy.validator.validatorContext.StandardValidator;
      * @return si es una lambda completa
      */
     private boolean isLambdaStructure(String line) {
-        String lambdaInLine = "^\\s*\\(?.*\\)?\\s*->\\s*.*;\\s*(//.*)?$";
+        String lambdaInLine  = "^((?:[^\"\']*|\"[^\"]*\"|\'[^\']*\')*)->\\s*.*;?\\s*(//.*)?$";
         String lambdaBlock = "^\\s*\\(?.*\\)?\\s*->\\s*\\{\\s*(//.*)?$"; 
         if (matchesPattern(line.trim(), lambdaBlock) || matchesPattern(line.trim(), lambdaInLine)){
            return true;           
