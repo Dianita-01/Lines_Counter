@@ -43,7 +43,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasInterfaceOrEnumDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "^\\b(?:\\w+\\s)+\\s*(?:interface|enum)\\s\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
+        String structureKeywords = "^(public|private|protected)(\\s\\w+)*\\s+(interface|enum)\\s+\\w+(\\s+\\w+,?)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     }
 
@@ -54,7 +54,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasClassDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\w+(\\s+\\w+)*\\s+class\\s+\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
+        String structureKeywords = "(public|private|protected)(\\s\\w+)*\\s+class\\s+\\w+(\\s+\\w+,?)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     } 
 
@@ -65,7 +65,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasRecordDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\b\\w+(?:\\s+\\w+)*\\s+record\\s*[\\w+]\\([^)]*\\)(?:\\s+\\w+(?:\\s+\\w+)*)?(?:\\s+[^{]+)?\\s*\\{?\\s*(//.*)?";
+        String structureKeywords = "(public|private|protected)(\\s\\w+)*\\s+record\\s+[\\w+]\\s*\\([^)]*\\)(\\s+\\w+,?)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     }
 
@@ -76,7 +76,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasNestedDefinition(String line) throws CodeStandarException {
-        if(line.trim().startsWith("class") ||line.trim().startsWith("interface")||line.trim().startsWith("enum"))
+        if(line.trim().startsWith("class ") ||line.trim().startsWith("interface ")||line.trim().startsWith("enum "))
         throw new CodeStandarException("No se pemite estructuras de control anidadas en el código");
         return false;
     }

@@ -46,11 +46,13 @@ public class FunctionStructureValidator extends StandardValidator{
 
     private boolean isFunction(String line) throws CodeStandarException{
         String structureFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\{?\\s*(//.*)?";
+        String structureStaticFunction ="^(\\w+\\s+)+\\w+\\s*\\(.*\\)\\s*.*\\;\\s*(//.*)?";
         if (matchesPattern(line.trim(), structureFunction)){
            return true;
-        } else {
+        } else if( matchesPattern(line.trim(), structureStaticFunction)){
            return false;
-        }
+        } 
+        return false;
     }
 
     private boolean isIncorrectStructure(String line) throws CodeStandarException{
