@@ -44,7 +44,7 @@ public class FlowControlWordValidator extends StandardValidator{
      */
 
     public boolean hasLogicalFlowControlWords(String line) throws CodeStandarException{
-        String structure ="^\\}[\\s]*(else if|catch)[\\s]*\\(.*\\)\\s*\\{?\\s*(//.*)?"; 
+        String structure ="^\\}[\\s]*(else\\s+if|catch)[\\s]*\\(.*\\)\\s*\\{?\\s*(//.*)?"; 
         return matchesPattern(line.trim(), structure);
     }
 
@@ -58,7 +58,7 @@ public class FlowControlWordValidator extends StandardValidator{
      */
 
     private boolean isIncompleteFlowControlWords(List<String> lines) throws CodeStandarException{
-        String structure ="^\\}[\\s]*(else if|catch)[\\s]*\\(.*"; 
+        String structure ="^\\}[\\s]*(else\\s+if|catch)[\\s]*\\(.*"; 
         if (matchesPattern(lines.get(0).trim(), structure)) {
            return findEndOfLine(lines);
         }

@@ -1,7 +1,7 @@
 package com.proy.model;
 
 /**
- * La clase "CodeSegment" representa un segmento de código que tienen líneas lógicas y físicas
+ * La clase "CodeSegment" representa un segmento de código que tienen líneas lógicas y físicas y guarda la cantidad de líneas físicas y lógicas contadas en ese segmento
  * 
  * @version 1.0
  */

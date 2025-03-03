@@ -34,16 +34,20 @@ public class StructureCountValidator extends StandardValidator {
         return false;
     }
 
+    /**
+     * Elimina la línea procesada de la lista de líneas por procesar, es un comportamiento similar *  de una pila, donde cada línea procesada, se elimina.
+     * 
+     * @param lines Las líneas del archivo a validar.
+     * @return {@code true} si la estructura es correcta.
+     * @throws CodeStandarException Si el archivo no cumple con la estructura esperada.
+    */
     private boolean isCorrectFileStructure(List<String> lines) throws CodeStandarException{
         while (lines.size()>0) {
-            if (isCommentLine(lines.get(0)) || lines.get(0).isBlank() || isOrganizationalStructure(lines)){
-                if(lines.size()>0){
-                    lines.remove(0);
-                }
+            String currentLine = lines.get(0);
+            if (isCommentLine(currentLine) || currentLine.isBlank() || isOrganizationalStructure(lines)){
+                lines.remove(0);  
             } else if (isStructureDefinition(lines)){
-                if(lines.size()>0){
-                    lines.remove(0);
-                }
+                lines.remove(0);
                 isCorrectContent(lines);
             }else {
                 throw new CodeStandarException("El archivo no cumple con una estructura válida.");
@@ -52,20 +56,26 @@ public class StructureCountValidator extends StandardValidator {
         return true;
     }
 
+     /**
+     * Checa que el contenido de las líneas sea correcto, para eso checa si es una definición de 
+     * estructura o si es comentario o línea en blanco.
+     * 
+     * @param lines Las líneas del archivo a validar.
+     * @return {@code true} si la estructura es correcta.
+     * @throws CodeStandarException Si el archivo no cumple con la estructura esperada.
+    */
     private boolean isCorrectContent(List<String> lines) throws CodeStandarException {
-        while (lines.size()>0) {
-            if (isStructureDefinition(lines)){
-                throw new CodeStandarException("No se pemite mas de una estructura en un archivo");
-            } else if (isCommentLine(lines.get(0)) || lines.get(0).isBlank() || isStructuresCorrectFormat(lines)) {
-                if(lines.size()>0){
-                    lines.remove(0);
-                }
+        while (!lines.isEmpty()) {
+            String currentLine = lines.get(0); 
+    
+            if (isStructureDefinition(lines)) {
+                throw new CodeStandarException("No se permite más de una estructura en un archivo");
+            } else if (isCommentLine(currentLine) || currentLine.isBlank() || isStructuresCorrectFormat(lines)) {
+                lines.remove(0);
             } else {
                 getCodeValidationContext().addPhysicalLine();
-                if(lines.size()>0){
-                    lines.remove(0);
-                }
-            } 
+                lines.remove(0); 
+            }
         }
         return true;
     }

@@ -54,6 +54,14 @@ public class PhysicalFormatValidator extends StandardValidator{
         return true;
     }
 
+    /**
+     * Verifica si una línea contiene múltiples declaraciones de variables en una sola línea.
+     * Si se encuentra más de una declaración, lanza una excepción.
+     * 
+     * @param line La línea de código a evaluar.
+     * @return {@code false} si no se encuentran declaraciones múltiples.
+     * @throws CodeStandarException Si se encuentran múltiples declaraciones.
+    */
     private boolean MultipleStatements(String line) throws CodeStandarException{
         String multipleStatements = "\\b[a-zA-Z_]\\w*\\s+[a-zA-Z_]\\w*\\s*(?:,\\s*[a-zA-Z_]\\w*\\s*)+;\\s*(//.*)?";
         if(matchesPattern(line.trim(), multipleStatements)){
