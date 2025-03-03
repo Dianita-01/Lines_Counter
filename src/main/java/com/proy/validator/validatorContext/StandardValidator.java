@@ -67,6 +67,7 @@ public abstract class StandardValidator {
         while (lines.size()>0) {
             if (isCommentLine(lines.get(0).trim())) {
                 lines.remove(0);
+                continue;
             } else if (matchesPattern(lines.get(0).trim(), incorrectEndLine)) {
                 throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
             } else if (matchesPattern(lines.get(0).trim(), endLine)) {

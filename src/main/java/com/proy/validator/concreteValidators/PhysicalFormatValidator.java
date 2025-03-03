@@ -27,24 +27,8 @@ public class PhysicalFormatValidator extends StandardValidator{
 
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (hasOnlyPhysicalLines(lines.get(0))) {
+        if (isCorrectFormat(lines.get(0))) {
             getCodeValidationContext().addPhysicalLine();
-            return true;
-        }
-        return false;
-    }
-
-    /*
-     * Revisa primero si la linea es una no permitida en el formato y despues valida los formatos de los tpos de líneas físicas
-     * 
-     * @param line representa la linea de código a validar
-     * @return si es una linea sin faltas en el formato físico
-     * @throws CodeStandarException si una línea no está en el formato
-     */
-
-
-    public boolean hasOnlyPhysicalLines(String line) throws CodeStandarException{
-        if (isCorrectFormat(line.trim())) {
             return true;
         }
         return false;
