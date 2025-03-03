@@ -1,6 +1,6 @@
 package integration.integration_test_resources;
-//Lineas fisicas: 6
-//Lineas logicas: 0
+//Lineas fisicas: 15
+//Lineas logicas: 4
 
 import javax.management.ConstructorParameters;
 
