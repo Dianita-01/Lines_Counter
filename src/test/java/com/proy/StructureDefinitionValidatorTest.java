@@ -1,4 +1,4 @@
-
+package com.proy;
 
 import com.proy.exceptions.CodeStandarException;
 import com.proy.validator.concreteValidators.StructureDefinitionValidator;

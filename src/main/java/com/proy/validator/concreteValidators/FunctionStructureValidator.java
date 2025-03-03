@@ -27,7 +27,7 @@ public class FunctionStructureValidator extends StandardValidator{
      */
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (isAbstractFunction(lines.get(0))){
+        if (isAbstractFunction(lines.get(0)) || isInterfaceFunctionDefinition(lines.get(0))){
             return false;
         }else if(isIncorrectStructure(lines.get(0)) || isFunction(lines.get(0)) || isIncompleteFunction(lines)) {
             getCodeValidationContext().addLogicalAndPhysicalLine();
@@ -53,6 +53,11 @@ public class FunctionStructureValidator extends StandardValidator{
 
     public boolean isAbstractFunction(String line) throws CodeStandarException{
         String structureAbstractFunction ="^(\\w+\\s+)*(abstract)\\s+\\w+\\s+\\w+\\s*\\(.*$";
+        return matchesPattern(line.trim(), structureAbstractFunction);
+    }
+
+    public boolean isInterfaceFunctionDefinition(String line) throws CodeStandarException{
+        String structureAbstractFunction ="^(\\w+\\s+)*\\s+\\w+\\s+\\w+\\s*\\(.*\\);$";
         return matchesPattern(line.trim(), structureAbstractFunction);
     }
 

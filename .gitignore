@@ -36,3 +36,5 @@ hs_err_pid*
 emptyFile.txt
 testFile.txt
 testDirectory
+#Script for fixing integration packages structure
+script.py

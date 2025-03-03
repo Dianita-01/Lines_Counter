@@ -1,8 +1,24 @@
 package integration.integration_test_resources;
 //Lineas fisicas: 6
 //Lineas logicas: 0
-public interface Cap013File {
-    public void method1();
-    void method2();
-    abstract void method3(String a, int b);
+
+import javax.management.ConstructorParameters;
+
+public class Cap013File {
+    @Deprecated
+    public method1(){
+        int x = 10;
+    }
+
+    @ConstructorParameters
+    private method2(){
+        System.out.println("testing");
+    }
+
+    @FunctionalInterface
+    protected method3(String a, int b){
+        //doNothing
+    }
 }
+
+

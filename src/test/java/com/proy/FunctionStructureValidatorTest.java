@@ -1,3 +1,4 @@
+package com.proy;
 
 
 import static org.junit.Assert.*;
