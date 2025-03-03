@@ -65,7 +65,9 @@ public abstract class StandardValidator {
         String endLine ="^.*?\\{\\s*(//.*)?$";
         String incorrectEndLine ="^.*?\\;\\s*(//.*)?$";
         while (lines.size()>0) {
-            if (matchesPattern(lines.get(0).trim(), incorrectEndLine)) {
+            if (isCommentLine(lines.get(0).trim())) {
+                lines.remove(0);
+            } else if (matchesPattern(lines.get(0).trim(), incorrectEndLine)) {
                 throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
             } else if (matchesPattern(lines.get(0).trim(), endLine)) {
                 if (lines.get(0).trim().startsWith("{")){
@@ -85,6 +87,4 @@ public abstract class StandardValidator {
         }
         return false;
     }
-
-
 }
