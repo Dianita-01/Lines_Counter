@@ -28,7 +28,8 @@ public class ControlStructureValidator extends StandardValidator{
     
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (isTryWithoutParenthesis(lines.get(0)) ||isIncorrectStructure(lines.get(0)) || isControlStructure(lines.get(0)) || isIncompleteControlStructure(lines)) {
+        isIncorrectStructure(lines.get(0));
+        if (isTryWithoutParenthesis(lines.get(0))|| isControlStructure(lines.get(0)) || isIncompleteControlStructure(lines)) {
             getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         } else {
@@ -55,13 +56,12 @@ public class ControlStructureValidator extends StandardValidator{
         return matchesPattern(line.trim(), structure);
     }
 
-    private boolean isIncorrectStructure(String line) throws CodeStandarException{
+    private void isIncorrectStructure(String line) throws CodeStandarException{
         String structure ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*\\{.*\\}\\s*(//.*)?";
         String structure2 ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*[\\w.\\s]+;?\\s*(//.*)?";
         if(matchesPattern(line.trim(), structure) || matchesPattern(line.trim(), structure2)){
             throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
         }
-        return false;
     }
 
        /*
@@ -75,7 +75,7 @@ public class ControlStructureValidator extends StandardValidator{
 
     private boolean isIncompleteControlStructure(List<String> lines) throws CodeStandarException{
         String onlyWord = "(if|for|switch|while|try)\\s*(//.*)?";
-        String structure = "(if|for|switch|while|try)\\s*\\(.*\\s*(//.*)?";
+        String structure = "(if|for|switch|while)\\s*\\(.*\\s*(//.*)?";
         if (matchesPattern(lines.get(0).trim(), onlyWord)){
             throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
         } else if (matchesPattern(lines.get(0).trim(), structure)) {
