@@ -14,10 +14,8 @@ import com.proy.validator.validatorContext.StandardValidator;
 
 public class ControlStructureValidator extends StandardValidator{
 
-    private CodeValidationContext codeValidationContext;
-
     public ControlStructureValidator(CodeValidationContext codeValidationContext){
-        this.codeValidationContext = codeValidationContext;
+        super(codeValidationContext);
     }
 
      /*
@@ -30,12 +28,9 @@ public class ControlStructureValidator extends StandardValidator{
     
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
-        if (isControlStructure(lines.get(0)) || isIncompleteControlStructure(lines)) {
-            if(lines.get(0).trim().startsWith("switch")){
-                this.codeValidationContext.addPhysicalLine();
-            }else {
-                this.codeValidationContext.addLogicalAndPhysicalLine();
-            }
+        isIncorrectStructure(lines.get(0));
+        if (isTryWithoutParenthesis(lines.get(0))|| isControlStructure(lines.get(0)) || isIncompleteControlStructure(lines)) {
+            getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         } else {
             return false;
@@ -52,8 +47,21 @@ public class ControlStructureValidator extends StandardValidator{
 
 
     private boolean isControlStructure(String line) throws CodeStandarException{
-        String structure ="(if|for|switch|while)\\s*\\(.*\\)\\s*\\{?\\s*(//.*)?";
+        String structure ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*\\{?\\s*(//.*)?";
         return matchesPattern(line.trim(), structure);
+    }
+
+    private boolean isTryWithoutParenthesis(String line){
+        String structure ="(try)\\s*\\{\\s*(//.*)?";
+        return matchesPattern(line.trim(), structure);
+    }
+
+    private void isIncorrectStructure(String line) throws CodeStandarException{
+        String structure ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*\\{.*\\}\\s*(//.*)?";
+        String structure2 ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*[\\w.\\s]+;?\\s*(//.*)?";
+        if(matchesPattern(line.trim(), structure) || matchesPattern(line.trim(), structure2)){
+            throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
+        }
     }
 
        /*
@@ -66,37 +74,18 @@ public class ControlStructureValidator extends StandardValidator{
      */
 
     private boolean isIncompleteControlStructure(List<String> lines) throws CodeStandarException{
-        String onlyWord = "(if|for|switch|while)\\s*(//.*)?";
+        String onlyWord = "(if|for|switch|while|try)\\s*(//.*)?";
         String structure = "(if|for|switch|while)\\s*\\(.*\\s*(//.*)?";
-        if (matchesPattern(lines.get(0).trim(), onlyWord)) throw new CodeStandarException("No se cumple el formato de codigo");
-        if (matchesPattern(lines.get(0).trim(), structure)) {
-           return findEndOfLine(lines);
+        if (matchesPattern(lines.get(0).trim(), onlyWord)){
+            throw new CodeStandarException("No se cumple el formato de codigo de estructuras de control");
+        } else if (matchesPattern(lines.get(0).trim(), structure)) {
+            return findEndOfLine(lines);
         }
         return false;
     }
         
-        /*
-     * Revisa las lineas de código hasta encontrar el final de linea de la estrcutrura de control
-     * 
-     * @param lines representa la lineas de código a validar
-     * @return si es una estructura de control con salto de línea con formato correcto
-     * @throws CodeStandarException si es una estrucura de control y no está en el formato
-     */
-    public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
-        lines.remove(0);
-        String structure ="^.*?\\{\\s*(//.*)?$";
-        while (lines.size()>0) {
-            if (matchesPattern(lines.get(0).trim(), structure)) {
-                if (lines.get(0).trim().startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
-                this.codeValidationContext.addPhysicalLine();
-                return true;
-            }
-            if(lines.size()>0) lines.remove(0);
-            this.codeValidationContext.addPhysicalLine();
-            }
-            if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo");
-            return false;
-    }
+     
+ 
 }
 
 

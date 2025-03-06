@@ -1,6 +1,8 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
-public class Cap010File implements Cap010Interface {
+import integration.integration_test_resources.Cap009Interface;
+
+public class Cap010File extends Cap001File implements Cap010Interface, Cap009Interface {
     @Override
     public void metodoInterfaz() {
         System.out.println("Implementación del método de la interfaz en la clase padre");

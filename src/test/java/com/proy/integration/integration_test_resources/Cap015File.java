@@ -1,22 +1,6 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
-public class Cap015File {
-    public static void main(String[] args) {
-        int number = 10;
+public enum Cap015File {
+    LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, MIMINGO;
 
-        if (number > 5) {
-            System.out.println("El número es mayor que 5");
-            if(number > 10){
-                System.out.println("Numero muy grande");
-            }
-        } else {
-            System.out.println("El número es menor o igual a 5");
-        }
-
-        if (number % 2 == 0) {
-            System.out.println("Es par");
-        } else {
-            System.out.println("Es impar");
-        }
-    }
 }

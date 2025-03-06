@@ -1,11 +1,12 @@
 package com.proy.integration;
 
+
 import java.io.FileNotFoundException;
 import com.proy.readers.HandleInput;
 
 public class Cap009 {
     private final String[] PATH = {
-        "src\\test\\java\\com\\proy\\integration\\integration_test_resources\\Cap009Interface.java"
+        "src\\test\\java\\com\\proy\\integration\\integration_test_resources\\Cap009File.java"
     };
 
     public void test() {

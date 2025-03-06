@@ -1,23 +1,21 @@
-package com.proy.integration.integration_test_resources;
-import java.beans.BeanProperty;
-import java.beans.JavaBean;
-import java.io.Serial;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
 
-import org.junit.AfterClass;
-import org.junit.experimental.categories.Category;
-
-// Anotación personalizada
+package integration.integration_test_resources;
 
 public class Cap019File {
-    @Deprecated
-    @Serial
-    public void doNothing(){
+    public static void main(String[] args) {
+        try {
+            int result = 10 / 0; 
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            System.out.println("Este bloque siempre se ejecuta.");
+        }
 
-    } 
+        try {
+            int result = 10 / 0; 
+        } catch (ArithmeticException e) {
+            System.out.println("Error: " + e.getMessage());
+        } 
+        
+    }
 }
-
-

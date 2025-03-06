@@ -1,15 +1,31 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
 public class Cap012File {
-    public void metodoSinParametros() {
-        System.out.println("Este es un método sin parámetros");
+
+    public static int cuadrado(int numero) {
+        return numero * numero;
+    }
+    public static int sumar(int a, int b) {
+        return a + b;
     }
 
-    public void otroMetodoSinParametros() {
-        System.out.println("Otro método sin parámetros");
+    public static String mensaje(int numero, String texto) {
+        return "El número es: " + numero + " y el texto es: " + texto;
     }
 
-    public void metodoConParametros(String param) {
-        System.out.println("Este método tiene parámetros: " + param);
+    public static int sumaArreglo(int[] numeros) {
+        int suma = 0;
+        for (int num : numeros) {
+            suma += num;
+        }
+        return suma;
     }
+
+    public static void main(String[] args) {
+        int[] arreglo = {1, 2, 3, 4, 5}; // Crear un arreglo
+        int resultado = sumaArreglo(arreglo); // Llamada al método
+        System.out.println("La suma del arreglo es: " + resultado);
+    }
+
 }
+

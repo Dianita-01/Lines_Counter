@@ -14,10 +14,8 @@ import com.proy.validator.validatorContext.StandardValidator;
 
 public class StructureDefinitionValidator extends StandardValidator{
 
-    private CodeValidationContext codeValidationContext;
-
     public StructureDefinitionValidator(CodeValidationContext codeValidationContext){
-        this.codeValidationContext = codeValidationContext;
+        super(codeValidationContext);
     }
 
       /*
@@ -31,7 +29,7 @@ public class StructureDefinitionValidator extends StandardValidator{
     @Override
     public boolean validate(List<String> lines) throws CodeStandarException {
         if (hasInterfaceOrEnumDefinition(lines) || hasClassDefinition(lines) || hasRecordDefinition(lines) || hasNestedDefinition(lines.get(0))){
-            this.codeValidationContext.addPhysicalLine();
+            getCodeValidationContext().addLogicalAndPhysicalLine();
             return true;
         } else {
             return false;
@@ -45,7 +43,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasInterfaceOrEnumDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "^\\b(?:\\w+\\s)+\\s*(?:interface|enum)\\s\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
+        String structureKeywords = "^(public|private|protected)(\\s\\w+)*\\s+(interface|enum)\\s+\\w+(\\s+\\w+,?)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     }
 
@@ -56,7 +54,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasClassDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\w+(\\s+\\w+)*\\s+class\\s+\\w+(\\s+\\w+)*\\s*\\{?\\s*(//.*)?$";
+        String structureKeywords = "(public|private|protected)(\\s\\w+)*\\s+class\\s+\\w+(\\s+\\w+,?)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     } 
 
@@ -67,7 +65,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasRecordDefinition(List<String> lines) throws CodeStandarException {
-        String structureKeywords = "\\b\\w+(?:\\s+\\w+)*\\s+record\\s*[\\w+]\\([^)]*\\)(?:\\s+\\w+(?:\\s+\\w+)*)?(?:\\s+[^{]+)?\\s*\\{?\\s*(//.*)?";
+        String structureKeywords = "(public|private|protected)(\\s\\w+)*\\s+record\\s+[\\w+]\\s*\\([^)]*\\)(\\s+\\w+,?)*\\s*\\{?\\s*(//.*)?$";
         return hasCorrestStructure(lines, structureKeywords);
     }
 
@@ -78,7 +76,7 @@ public class StructureDefinitionValidator extends StandardValidator{
      * @return si es una definición completa
      */
     public boolean hasNestedDefinition(String line) throws CodeStandarException {
-        if(line.trim().startsWith("class") ||line.trim().startsWith("interface")||line.trim().startsWith("enum"))
+        if(line.trim().startsWith("class ") ||line.trim().startsWith("interface ")||line.trim().startsWith("enum "))
         throw new CodeStandarException("No se pemite estructuras de control anidadas en el código");
         return false;
     }
@@ -101,30 +99,6 @@ public class StructureDefinitionValidator extends StandardValidator{
         } else {
            return false;
         }
-    }
-
-    /*
-     * Revisa si la linea es una definición cumple el formato con su salto de línea
-     * 
-     * @param line representa la linea de código a validar
-     * @return si es una definición completa
-     * @throws CodeStandarException si es una estrucura de definición y no está en el formato
-     */
-    public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
-        lines.remove(0);
-        String structure ="^.*?\\{\\s*(//.*)?$";
-        while (lines.size()>0) {
-            if (matchesPattern(lines.get(0).trim(), structure)) {
-                if (lines.get(0).trim().startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
-                this.codeValidationContext.addPhysicalLine();
-                return true;
-            }
-            this.codeValidationContext.addPhysicalLine();
-            if(lines.size()>0) lines.remove(0);
-        }
-        if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo");
-        return false;
-        
     }
     
 }

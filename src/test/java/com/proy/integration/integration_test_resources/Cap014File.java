@@ -1,6 +1,7 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
-public enum Cap014File {
-    LUNES, MARTES, MIERCOLES, JUEVES, VIERNES, SABADO, MIMINGO;
-
+public interface Cap014File {
+    public void method1();
+    void method2();
+    void method3(String a, int b);
 }

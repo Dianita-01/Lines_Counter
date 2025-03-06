@@ -14,11 +14,9 @@ import com.proy.validator.validatorContext.StandardValidator;
  */
 
 public class FlowControlWordValidator extends StandardValidator{
-    
-    private CodeValidationContext codeValidationContext;
 
     public FlowControlWordValidator(CodeValidationContext codeValidationContext){
-        this.codeValidationContext = codeValidationContext;
+        super(codeValidationContext);
     }
 
      /*
@@ -31,7 +29,7 @@ public class FlowControlWordValidator extends StandardValidator{
 
     public boolean validate(List<String> lines) throws CodeStandarException {
         if (hasLogicalFlowControlWords(lines.get(0)) || isIncompleteFlowControlWords(lines)) {
-            this.codeValidationContext.addLogicalAndPhysicalLine();
+            getCodeValidationContext().addPhysicalLine();
             return true;
         } 
         return false;
@@ -67,30 +65,4 @@ public class FlowControlWordValidator extends StandardValidator{
         return false;
     }
 
-       /*
-     * Revisa las lineas de código hasta encontrar el final de linea de la flujo de control lógicas de las estructuras de control
-     * 
-     * @param lines representa la lineas de código a validar
-     * @return si es una asignación con salto de línea con formato correcto
-     * @throws CodeStandarException si es una estrucura de flujo de control lógicas de las estructuras de control y no está en el formato
-     */
-        
-    public boolean findEndOfLine(List<String> lines) throws CodeStandarException{
-        lines.remove(0);
-        String structure ="^.*?\\{\\s*(//.*)?$";
-        while (lines.size()>0) {
-            if (matchesPattern(lines.get(0).trim(), structure)) {
-                    if (lines.get(0).trim().startsWith("{")) {
-                        if (lines.get(0).trim().startsWith("{")) throw new CodeStandarException("No se cumple el formato de codigo");
-                        this.codeValidationContext.addPhysicalLine();
-                        return true;
-                    }
-            }
-                if(lines.size()>0) lines.remove(0);
-                this.codeValidationContext.addPhysicalLine();
-            }
-            if(lines.size()<=0) throw new CodeStandarException("No se cumple el formato de codigo");
-            return false;
-    }
-    
 }

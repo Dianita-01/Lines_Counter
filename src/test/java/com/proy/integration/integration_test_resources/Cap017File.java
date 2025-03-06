@@ -1,17 +1,20 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
 public class Cap017File {
     public static void main(String[] args) {
-        int day = 3;
-        String dayName = "Domingo";
+        int number = 10;
 
-        switch (day) {
-            case 1:
-                dayName = "Lunes";
-                break;
-            case 2:
-                dayName = "Martes";
+        if (number > 10) {
+            if(number >= 20){
+                System.out.println("Numeero mayor a 20 ajajsjakd");
+            } else{
+                System.out.println("El numero esta entre 11 y 20");
+            }
+            System.out.println("El número es mayor que 10");
+        } else if (number == 10) {
+            System.out.println("El número es igual a 10");
+        } else {
+            System.out.println("El número es menor que 10");
         }
-        System.out.println(dayName);
     }
 }

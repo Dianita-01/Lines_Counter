@@ -1,4 +1,4 @@
-package com.proy.integration.integration_test_resources;
+package integration.integration_test_resources;
 
 public class Cap009File implements Cap009Interface {
     @Override
