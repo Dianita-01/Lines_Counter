@@ -30,6 +30,16 @@ public class DoStaticStructureValidator extends StandardValidator{
         }
     }
 
+    /**
+     * Verifica si una línea de código contiene una estructura do o static
+     * seguida de una apertura de bloque de código, y valida si cumple con el formato establecido.
+     * Si no se cumple el formato, se lanza una excepción {@code CodeStandarException}.
+     * 
+     * @param line La línea de código a verificar.
+     * @return true si la línea cumple con el formato de {@code do} o {@code static} seguido de una apertura de bloque;
+     *         false si la línea no comienza con {@code do} o {@code static}.
+     * @throws CodeStandarException Si la línea comienza con {@code do} o {@code static} pero no cumple con el formato esperado.
+     */
     public boolean isTryDoStaticStructure(String line) throws CodeStandarException{
         if (line.trim().startsWith("do ")||line.trim().startsWith("static ")) {
             String tryDoStructure = "(static|do)\\s*\\{\\s*(//.*)?";

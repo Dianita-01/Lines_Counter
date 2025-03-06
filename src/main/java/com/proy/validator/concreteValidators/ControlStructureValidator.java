@@ -51,11 +51,26 @@ public class ControlStructureValidator extends StandardValidator{
         return matchesPattern(line.trim(), structure);
     }
 
+    /**
+     * Verifica si una línea de código contiene una estructura try  con apertura de bloque.
+     *
+     * @param line La línea de código a evaluar.
+     * @return true si la línea coincide con la estructura de {@code try} sin paréntesis; 
+     *         false en caso contrario.
+     */
     private boolean isTryWithoutParenthesis(String line){
         String structure ="(try)\\s*\\{\\s*(//.*)?";
         return matchesPattern(line.trim(), structure);
     }
 
+    /**
+     * Verifica si una línea de código presenta una estructura incorrecta de control de flujo
+     * según las reglas de estilo definidas.
+     * Si detecta una estructura no permitida, lanza una excepción {@code CodeStandarException}.
+     * 
+     * @param line La línea de código a validar.
+     * @throws CodeStandarException Si la línea no cumple con el formato de código permitido.
+     */
     private void isIncorrectStructure(String line) throws CodeStandarException{
         String structure ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*\\{.*\\}\\s*(//.*)?";
         String structure2 ="(if|for|switch|while|try)\\s*\\(.*\\)\\s*[\\w.\\s]+;?\\s*(//.*)?";
